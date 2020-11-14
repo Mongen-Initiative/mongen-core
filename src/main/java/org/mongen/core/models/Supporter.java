@@ -1,10 +1,12 @@
 package org.mongen.core.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,9 +16,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="supporter")
-public class Supporter implements java.io.Serializable{
+public class Supporter implements Serializable{
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	@Column(name="last_name")

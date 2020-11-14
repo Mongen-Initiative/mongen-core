@@ -1,24 +1,39 @@
 package org.mongen.core.models;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name="beneficiary")
-public class Beneficiary implements java.io.Serializable{
+public class Beneficiary implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6123628985776060956L;
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(hidden=true)
 	private Long id;
-	private String name;
+	@Column(name="first_name")
+	private String firstName;
 	@Column(name="last_name")
 	private String lastName;
 	private String gender;
@@ -28,13 +43,33 @@ public class Beneficiary implements java.io.Serializable{
 	private Integer height;
 	private Integer weight;
 	private String address;
+	
+	@ApiModelProperty(hidden=true)
 	@Column(updatable=false)
 	private Date created;
+	@ApiModelProperty(hidden=true)
 	private Date updated;
 	
+	@ManyToMany
+    @JoinTable(
+        name = "beneficiary_institutions", 
+        joinColumns = @JoinColumn(name = "beneficiary_id"), 
+        inverseJoinColumns = @JoinColumn(name = "institution_id")
+    )
+    private List<Institution> institutions;
+	
+	@ManyToMany
+    @JoinTable(
+        name = "beneficiary_disabilities", 
+        joinColumns = @JoinColumn(name = "beneficiary_id"), 
+        inverseJoinColumns = @JoinColumn(name = "disability_id")
+    )
+    private List<Disability> disabilities;
+	
+	@JsonIgnoreProperties(value={"beneficiaries","created","id","updated","donors","institution","colaborators","supporters"})
 	@ManyToOne
 	@JoinColumn(name="country_code")
-	private Country countryBeneficiary;
+	private Country country;
 	
 	public Beneficiary() {
 		
@@ -56,14 +91,6 @@ public class Beneficiary implements java.io.Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getLastName() {
@@ -138,12 +165,36 @@ public class Beneficiary implements java.io.Serializable{
 		this.updated = updated;
 	}
 
-	public Country getCountryBeneficiary() {
-		return countryBeneficiary;
+	public Country getCountry() {
+		return country;
 	}
 
-	public void setCountryBeneficiary(Country countryBeneficiary) {
-		this.countryBeneficiary = countryBeneficiary;
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public List<Institution> getInstitutions() {
+		return institutions;
+	}
+
+	public void setInstitutions(List<Institution> institutions) {
+		this.institutions = institutions;
+	}
+
+	public List<Disability> getDisabilities() {
+		return disabilities;
+	}
+
+	public void setDisabilities(List<Disability> disabilities) {
+		this.disabilities = disabilities;
 	}
 	
 }

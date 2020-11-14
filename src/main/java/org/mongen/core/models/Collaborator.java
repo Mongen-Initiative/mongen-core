@@ -15,8 +15,8 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="donor")
-public class Donor implements Serializable{
+@Table(name="colaborator")
+public class Collaborator implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -30,13 +30,11 @@ public class Donor implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="country_code")
-	private Country countryDonor;
+	private Country countryColaborator;
 	
-	
-	public Donor(){
+	public Collaborator() {
 		
 	}
-	
 	@PrePersist
     protected void onCreate(){
         this.created = new Date();
@@ -46,53 +44,40 @@ public class Donor implements Serializable{
     protected void onUpdate(){
         this.updated = new Date();
     }
-
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getLastName() {
 		return lastName;
 	}
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
 	public Date getCreated() {
 		return created;
 	}
-
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-
 	public Date getUpdated() {
 		return updated;
 	}
-
 	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
-
-	public Country getCountryDonor() {
-		return countryDonor;
+	public Country getCountryColaborator() {
+		return countryColaborator;
 	}
-
-	public void setCountryDonor(Country countryDonor) {
-		this.countryDonor = countryDonor;
+	public void setCountryColaborator(Country countryColaborator) {
+		this.countryColaborator = countryColaborator;
 	}
-
 	public String getFirstName() {
 		return firstName;
 	}
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	
 }
