@@ -24,10 +24,6 @@ import io.swagger.annotations.ApiModelProperty;
 @Entity
 @Table(name="beneficiary")
 public class Beneficiary implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6123628985776060956L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ApiModelProperty(hidden=true)
@@ -50,6 +46,7 @@ public class Beneficiary implements Serializable{
 	@ApiModelProperty(hidden=true)
 	private Date updated;
 	
+	@JsonIgnoreProperties(value={"beneficiaries","created","id","updated"})
 	@ManyToMany
     @JoinTable(
         name = "beneficiary_institutions", 
@@ -58,6 +55,16 @@ public class Beneficiary implements Serializable{
     )
     private List<Institution> institutions;
 	
+	@JsonIgnoreProperties(value={"beneficiaries","created","id","updated","country"})
+	@ManyToMany
+    @JoinTable(
+        name = "beneficiary_donors", 
+        joinColumns = @JoinColumn(name = "beneficiary_id"), 
+        inverseJoinColumns = @JoinColumn(name = "donor_id")
+    )
+    private List<Donor> donors;
+	
+	@JsonIgnoreProperties(value={"beneficiaries","created","id","updated"})
 	@ManyToMany
     @JoinTable(
         name = "beneficiary_disabilities", 
@@ -195,6 +202,14 @@ public class Beneficiary implements Serializable{
 
 	public void setDisabilities(List<Disability> disabilities) {
 		this.disabilities = disabilities;
+	}
+
+	public List<Donor> getDonors() {
+		return donors;
+	}
+
+	public void setDonors(List<Donor> donors) {
+		this.donors = donors;
 	}
 	
 }

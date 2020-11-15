@@ -19,10 +19,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name="country")
 public class Country implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8787834100277321488L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="code")
@@ -34,7 +30,7 @@ public class Country implements Serializable{
 	private Date created;
 	private Date updated;
 	
-	@OneToMany(mappedBy="countryDonor")
+	@OneToMany(mappedBy="country")
 	private List<Donor> donors;
 	
 	@OneToMany(mappedBy="countryColaborator")

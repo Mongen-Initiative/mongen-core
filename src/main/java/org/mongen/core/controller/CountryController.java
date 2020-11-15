@@ -2,7 +2,6 @@ package org.mongen.core.controller;
 
 import java.util.List;
 
-import org.mongen.core.models.Beneficiary;
 import org.mongen.core.models.Country;
 import org.mongen.core.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;

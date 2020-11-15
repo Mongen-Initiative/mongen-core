@@ -2,6 +2,7 @@ package org.mongen.core.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -30,8 +33,15 @@ public class Donor implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="country_code")
-	private Country countryDonor;
+	private Country country;
 	
+	@ManyToMany
+    @JoinTable(
+        name = "beneficiary_donors", 
+        joinColumns = @JoinColumn(name = "donor_id"), 
+        inverseJoinColumns = @JoinColumn(name = "beneficiary_id")
+    )
+    private List<Beneficiary> beneficiaries;
 	
 	public Donor(){
 		
@@ -80,11 +90,11 @@ public class Donor implements Serializable{
 	}
 
 	public Country getCountryDonor() {
-		return countryDonor;
+		return country;
 	}
 
 	public void setCountryDonor(Country countryDonor) {
-		this.countryDonor = countryDonor;
+		this.country = countryDonor;
 	}
 
 	public String getFirstName() {
@@ -93,6 +103,14 @@ public class Donor implements Serializable{
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+
+	public List<Beneficiary> getBeneficiaries() {
+		return beneficiaries;
+	}
+
+	public void setBeneficiaries(List<Beneficiary> beneficiaries) {
+		this.beneficiaries = beneficiaries;
 	}
 	
 }

@@ -37,7 +37,7 @@ public class InstitutionService {
 		}
 	}
 	
-	public InstitutionType findDisabilityTypeById(Long id) {
+	public InstitutionType findInstitutionTypeById(Long id) {
 		Optional<InstitutionType> temp = typeRepo.findById(id);
 		if(temp.isPresent()) {
 			return temp.get();
