@@ -28,12 +28,12 @@ public class SwaggerConfig {
 	}
 	private ApiInfo metaInfo() {
 		ApiInfo apiInfo = new ApiInfo(
-				"API de Street Priest",
-				"RestAPI de Street Priest",
+				"Mongen - Core Service API",
+				"RestAPI endpoints, payloads and parameters for Mongen Core Service",
 				"1.0",
-				"Terminos de Servicio",
-				new Contact("Street Priest","https://streetpriests.org.ng","marcelo.negrier@gmail.com"),
-				"Apache Licencia Version 2.0",
+				"https://github.com/Mongen-Initiative",
+				new Contact("Mongen Initiative","https://github.com/Mongen-Initiative","mongeninitiative@gmail.com"),
+				"Apache-2.0",
 				"https://www.apache.org/licesen.html",
 				Collections.emptyList()
 				);
