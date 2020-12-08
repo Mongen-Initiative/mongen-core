@@ -77,9 +77,13 @@ public class Beneficiary implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="country_code")
 	private Country country;
-	
+
+	@ManyToOne
+	@JoinColumn(name="street_situation")
+	private StreetSituation street_situation;
+
 	public Beneficiary() {
-		
+
 	}
 	
 	@PrePersist
@@ -211,5 +215,12 @@ public class Beneficiary implements Serializable{
 	public void setDonors(List<Donor> donors) {
 		this.donors = donors;
 	}
-	
+
+	public StreetSituation getStreet_situation() {
+		return street_situation;
+	}
+
+	public void setStreet_situation(StreetSituation street_situation) {
+		this.street_situation = street_situation;
+	}
 }
