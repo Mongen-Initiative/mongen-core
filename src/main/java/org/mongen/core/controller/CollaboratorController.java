@@ -23,40 +23,40 @@ import io.swagger.annotations.ApiOperation;
 public class CollaboratorController {
 
 	@Autowired
-	CollaboratorService colaboratorServ;
+	CollaboratorService collaboratorServ;
 	
 	@ApiOperation(value = "Get All the Collaborators")
 	@GetMapping("/collaborators")
 	public ResponseEntity<List<Collaborator>> getCollaborators(){
-		List<Collaborator> cola = colaboratorServ.getCollaborators();
+		List<Collaborator> cola = collaboratorServ.getCollaborators();
 		return ResponseEntity.status(HttpStatus.OK).body(cola);
 	}
 	
 	@ApiOperation(value = "Get one Collaborator")
 	@GetMapping("/collaborators/{id}")
 	public ResponseEntity<Collaborator> getCollaboratorId(@PathVariable("id") Long id){
-		Collaborator cola = colaboratorServ.findCollaboratorById(id);
+		Collaborator cola = collaboratorServ.findCollaboratorById(id);
 		return ResponseEntity.status(HttpStatus.OK).body(cola);
 	}
 	
 	@ApiOperation(value = "Create a Collaborator")
 	@PostMapping("/collaborators")
 	public ResponseEntity<Collaborator> createCollaborator(@RequestBody Collaborator collaborator){
-		Collaborator cola = colaboratorServ.createCollaborator(collaborator);
+		Collaborator cola = collaboratorServ.createCollaborator(collaborator);
 		return ResponseEntity.status(HttpStatus.CREATED).body(cola);
 	}
 	
 	@ApiOperation(value = "Update a Collaborator")
 	@PatchMapping("/collaborators/{id}")
 	public ResponseEntity<Collaborator> updateCollaborator(@PathVariable("id") Long id, @RequestBody Collaborator collaborator){
-		Collaborator cola = colaboratorServ.updateCollaborator(collaborator, id);
+		Collaborator cola = collaboratorServ.updateCollaborator(collaborator, id);
 		return ResponseEntity.status(HttpStatus.OK).body(cola);
 	}
 	
 	@ApiOperation(value = "Delete a Collaborator")
 	@DeleteMapping("/collaborators/{id}")
 	public ResponseEntity<?> deleteCollaborator(@PathVariable("id") Long id){
-		colaboratorServ.deleteCollaborator(id);
+		collaboratorServ.deleteCollaborator(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Delete Collaborator with ID: " + id);
 	}
 }

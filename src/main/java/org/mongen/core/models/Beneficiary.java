@@ -73,9 +73,9 @@ public class Beneficiary implements Serializable{
     )
     private List<Disability> disabilities;
 	
-	@JsonIgnoreProperties(value={"beneficiaries","created","id","updated","donors","institution","colaborators","supporters"})
+	@JsonIgnoreProperties(value={"beneficiaries","created","id","updated","donors","institution","collaborators","supporters"})
 	@ManyToOne
-	@JoinColumn(name="country_code")
+	@JoinColumn(name="country_iso")
 	private Country country;
 
 	@ManyToOne

@@ -17,8 +17,8 @@ public class CountryService {
 		return countryRepo.findAll();
 	}
 	
-	public Country findCountryById(Long id) {
-		Optional<Country> temp = countryRepo.findById(id);
+	public Country findCountryById(String countryISO) {
+		Optional<Country> temp = countryRepo.findByCountryISO(countryISO);
 		if(temp.isPresent()) {
 			return temp.get();
 		} else {
@@ -30,12 +30,12 @@ public class CountryService {
 		return countryRepo.save(nuevo);
 	}
 	
-	public Country updateCountry(Country nuevo,Long id) {
-		nuevo.setId(id);
+	public Country updateCountry(Country nuevo,String countryISO) {
+		nuevo.setCountryISO(countryISO);
 		return countryRepo.save(nuevo);
 	}
 	
-	public void deleteCountry(Long id) {
-		countryRepo.deleteById(id);
+	public void deleteCountry(String countryISO) {
+		countryRepo.deleteByCountryISO(countryISO);
 	}
 }

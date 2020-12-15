@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class CollaboratorService {
 	@Autowired
-	CollaboratorRepository colaboratorRepo;
+	CollaboratorRepository collaboratorRepo;
 	
 	public List<Collaborator> getCollaborators(){
-		return colaboratorRepo.findAll();
+		return collaboratorRepo.findAll();
 	}
 	
 	public Collaborator findCollaboratorById(Long id) {
-		Optional<Collaborator> temp = colaboratorRepo.findById(id);
+		Optional<Collaborator> temp = collaboratorRepo.findById(id);
 		if(temp.isPresent()) {
 			return temp.get();
 		} else {
@@ -27,15 +27,15 @@ public class CollaboratorService {
 	}
 	
 	public Collaborator createCollaborator(Collaborator nuevo) {
-		return colaboratorRepo.save(nuevo);
+		return collaboratorRepo.save(nuevo);
 	}
 	
 	public Collaborator updateCollaborator(Collaborator nuevo,Long id) {
 		nuevo.setId(id);
-		return colaboratorRepo.save(nuevo);
+		return collaboratorRepo.save(nuevo);
 	}
 	
 	public void deleteCollaborator(Long id) {
-		colaboratorRepo.deleteById(id);
+		collaboratorRepo.deleteById(id);
 	}
 }

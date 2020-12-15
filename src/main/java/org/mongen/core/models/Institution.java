@@ -37,7 +37,7 @@ public class Institution implements Serializable{
     private List<Beneficiary> beneficiaries;
 	
 	@ManyToOne
-	@JoinColumn(name="country_code")
+	@JoinColumn(name="country_iso")
 	private Country countryInstitution;
 	
 	@ManyToOne

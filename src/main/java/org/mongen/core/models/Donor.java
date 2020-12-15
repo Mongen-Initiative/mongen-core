@@ -32,7 +32,7 @@ public class Donor implements Serializable{
 	private Date updated;
 	
 	@ManyToOne
-	@JoinColumn(name="country_code")
+	@JoinColumn(name="country_iso")
 	private Country country;
 	
 	@ManyToMany

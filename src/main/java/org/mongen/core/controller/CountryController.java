@@ -32,9 +32,9 @@ public class CountryController {
 	}
 	
 	@ApiOperation(value = "Get one Country")
-	@GetMapping("/countries/{id}")
-	public ResponseEntity<Country> getCountryId(@PathVariable("id") Long id){
-		Country coun = countryServ.findCountryById(id);
+	@GetMapping("/countries/{country_iso}")
+	public ResponseEntity<Country> getCountryId(@PathVariable("country_iso") String countryISO){
+		Country coun = countryServ.findCountryById(countryISO);
 		return ResponseEntity.status(HttpStatus.OK).body(coun);
 	}
 	
@@ -46,16 +46,16 @@ public class CountryController {
 	}
 	
 	@ApiOperation(value = "Update a Country")
-	@PatchMapping("/countries/{id}")
-	public ResponseEntity<Country> updateCountry(@PathVariable("id") Long id, @RequestBody Country country){
-		Country coun = countryServ.updateCountry(country, id);
+	@PatchMapping("/countries/{country_iso}")
+	public ResponseEntity<Country> updateCountry(@PathVariable("country_iso") String countryISO, @RequestBody Country country){
+		Country coun = countryServ.updateCountry(country, countryISO);
 		return ResponseEntity.status(HttpStatus.OK).body(coun);
 	}
 	
 	@ApiOperation(value = "Delete a Country")
-	@DeleteMapping("/countries/{id}")
-	public ResponseEntity<?> deleteCountry(@PathVariable("id") Long id){
-		countryServ.deleteCountry(id);
-		return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Delete Country with ID: " + id);
+	@DeleteMapping("/countries/{country_iso}")
+	public ResponseEntity<?> deleteCountry(@PathVariable("country_iso") String countryISO){
+		countryServ.deleteCountry(countryISO);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Delete Country with ID: " + countryISO);
 	}
 }

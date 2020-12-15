@@ -30,7 +30,7 @@ public class Organization implements Serializable{
 	private Date updated;
 
 	@ManyToOne
-	@JoinColumn(name="country_code")
+	@JoinColumn(name="country_iso")
 	private Country country;
 
 	@ManyToOne

@@ -15,7 +15,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="colaborator")
+@Table(name="collaborator")
 public class Collaborator implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +29,8 @@ public class Collaborator implements Serializable{
 	private Date updated;
 	
 	@ManyToOne
-	@JoinColumn(name="country_code")
-	private Country countryColaborator;
+	@JoinColumn(name="country_iso")
+	private Country countryCollaborator;
 	
 	public Collaborator() {
 		
@@ -68,11 +68,11 @@ public class Collaborator implements Serializable{
 	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
-	public Country getCountryColaborator() {
-		return countryColaborator;
+	public Country getCountryCollaborator() {
+		return countryCollaborator;
 	}
-	public void setCountryColaborator(Country countryColaborator) {
-		this.countryColaborator = countryColaborator;
+	public void setCountryCollaborator(Country countryCollaborator) {
+		this.countryCollaborator = countryCollaborator;
 	}
 	public String getFirstName() {
 		return firstName;
