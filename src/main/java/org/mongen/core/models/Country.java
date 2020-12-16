@@ -14,7 +14,9 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Table(name="country")
@@ -27,22 +29,32 @@ public class Country implements Serializable{
 	@Column(name="calling_code")
 	private String callingCode;
 	private String name;
+	@JsonIgnore
+	@ApiModelProperty(hidden=true)
+	@Column(updatable=false)
 	private Date created;
+	@JsonIgnore
+	@ApiModelProperty(hidden=true)
 	private Date updated;
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy="country")
 	private List<Donor> donors;
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy="countryCollaborator")
 	private List<Collaborator> collaborators;
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy="countrySupporter")
 	private List<Supporter> supporters;
-	
+
+	@JsonIgnore
 	@JsonIgnoreProperties("country")
 	@OneToMany(mappedBy="country")
 	private List<Beneficiary> beneficiaries;
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy="countryInstitution")
 	private List<Institution> institution;
 	
