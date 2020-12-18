@@ -3,6 +3,8 @@ package org.mongen.core.controller;
 import java.util.List;
 
 import org.mongen.core.models.Collaborator;
+import org.mongen.core.models.CollaboratorType;
+import org.mongen.core.models.DisabilityType;
 import org.mongen.core.service.CollaboratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,13 @@ public class CollaboratorController {
 	@GetMapping("/collaborators")
 	public ResponseEntity<List<Collaborator>> getCollaborators(){
 		List<Collaborator> cola = collaboratorServ.getCollaborators();
+		return ResponseEntity.status(HttpStatus.OK).body(cola);
+	}
+
+	@ApiOperation(value = "Get All the Collaborator Types")
+	@GetMapping("/collaborators/type")
+	public ResponseEntity<List<CollaboratorType>> getCollaboratorTypes(){
+		List<CollaboratorType> cola = collaboratorServ.getCollaboratorTypes();
 		return ResponseEntity.status(HttpStatus.OK).body(cola);
 	}
 	

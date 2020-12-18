@@ -1,5 +1,7 @@
 package org.mongen.core.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -24,13 +26,19 @@ public class Collaborator implements Serializable{
 	private String firstName;
 	@Column(name="last_name")
 	private String lastName;
+	@JsonIgnore
 	@Column(updatable=false)
 	private Date created;
+	@JsonIgnore
 	private Date updated;
 	
 	@ManyToOne
 	@JoinColumn(name="country_iso")
 	private Country countryCollaborator;
+
+	@ManyToOne
+	@JoinColumn(name="type")
+	private CollaboratorType type;
 	
 	public Collaborator() {
 		

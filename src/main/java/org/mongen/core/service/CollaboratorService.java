@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.mongen.core.models.Collaborator;
+import org.mongen.core.models.CollaboratorType;
 import org.mongen.core.repository.CollaboratorRepository;
+import org.mongen.core.repository.CollaboratorTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 public class CollaboratorService {
 	@Autowired
 	CollaboratorRepository collaboratorRepo;
+	@Autowired
+	CollaboratorTypeRepository collaboratorTypeRepo;
 	
 	public List<Collaborator> getCollaborators(){
 		return collaboratorRepo.findAll();
@@ -37,5 +41,9 @@ public class CollaboratorService {
 	
 	public void deleteCollaborator(Long id) {
 		collaboratorRepo.deleteById(id);
+	}
+
+	public List<CollaboratorType> getCollaboratorTypes() {
+		return collaboratorTypeRepo.findAll();
 	}
 }
