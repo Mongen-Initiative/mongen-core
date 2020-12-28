@@ -17,9 +17,11 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 @Entity
 @Table(name="country")
+@Data
 public class Country implements Serializable{
 	@Id
 	@Column(name="country_iso")
@@ -70,76 +72,5 @@ public class Country implements Serializable{
     protected void onUpdate(){
         this.updated = new Date();
     }
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Date getCreated() {
-		return created;
-	}
-	public void setCreated(Date created) {
-		this.created = created;
-	}
-	public Date getUpdated() {
-		return updated;
-	}
-	public void setUpdated(Date updated) {
-		this.updated = updated;
-	}
-	public List<Donor> getDonors() {
-		return donors;
-	}
-	public void setDonors(List<Donor> donors) {
-		this.donors = donors;
-	}
-	public List<Collaborator> getCollaborators() {
-		return collaborators;
-	}
-	public void setCollaborators(List<Collaborator> collaborators) {
-		this.collaborators = collaborators;
-	}
-	public List<Supporter> getSupporters() {
-		return supporters;
-	}
-	public void setSupporters(List<Supporter> supporters) {
-		this.supporters = supporters;
-	}
-	public List<Beneficiary> getBeneficiaries() {
-		return beneficiaries;
-	}
-	public void setBeneficiaries(List<Beneficiary> beneficiaries) {
-		this.beneficiaries = beneficiaries;
-	}
-	public List<Institution> getInstitution() {
-		return institution;
-	}
-	public void setInstitution(List<Institution> institution) {
-		this.institution = institution;
-	}
 
-	public String getCallingCode() {
-		return callingCode;
-	}
-
-	public void setCallingCode(String callingCode) {
-		this.callingCode = callingCode;
-	}
-
-	public String getCountryISO3() {
-		return countryISO3;
-	}
-
-	public void setCountryISO3(String countryISO3) {
-		this.countryISO3 = countryISO3;
-	}
-
-	public String getCountryISO() {
-		return countryISO;
-	}
-
-	public void setCountryISO(String countryISO) {
-		this.countryISO = countryISO;
-	}
 }

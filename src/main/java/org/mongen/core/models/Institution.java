@@ -1,5 +1,7 @@
 package org.mongen.core.models;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -19,6 +21,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="institution")
+@Data
 public class Institution implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,60 +61,4 @@ public class Institution implements Serializable{
         this.updated = new Date();
     }
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Date getCreated() {
-		return created;
-	}
-
-	public void setCreated(Date created) {
-		this.created = created;
-	}
-
-	public Date getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(Date updated) {
-		this.updated = updated;
-	}
-
-	public Country getCountryInstitution() {
-		return countryInstitution;
-	}
-
-	public void setCountryInstitution(Country countryInstitution) {
-		this.countryInstitution = countryInstitution;
-	}
-
-	public InstitutionType getType() {
-		return type;
-	}
-
-	public void setType(InstitutionType type) {
-		this.type = type;
-	}
-
-	public List<Beneficiary> getBeneficiaries() {
-		return beneficiaries;
-	}
-
-	public void setBeneficiaries(List<Beneficiary> beneficiaries) {
-		this.beneficiaries = beneficiaries;
-	}
-	
 }
