@@ -5,8 +5,11 @@ import java.util.Optional;
 
 import org.mongen.core.models.Collaborator;
 import org.mongen.core.models.CollaboratorType;
+import org.mongen.core.models.Country;
+import org.mongen.core.models.payloads.CollaboratorPayload;
 import org.mongen.core.repository.CollaboratorRepository;
 import org.mongen.core.repository.CollaboratorTypeRepository;
+import org.mongen.core.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,8 @@ public class CollaboratorService {
 	CollaboratorRepository collaboratorRepo;
 	@Autowired
 	CollaboratorTypeRepository collaboratorTypeRepo;
+	@Autowired
+	CountryRepository countryRepo;
 	
 	public List<Collaborator> getCollaborators(){
 		return collaboratorRepo.findAll();
@@ -30,8 +35,10 @@ public class CollaboratorService {
 		}
 	}
 	
-	public Collaborator createCollaborator(Collaborator nuevo) {
-		return collaboratorRepo.save(nuevo);
+	public Collaborator createCollaborator(CollaboratorPayload collaborator_payload) {
+		Optional<Country> country = countryRepo.findByCountryISO(collaborator_payload.getCountry_iso());
+		Collaborator new_collaborator = new Collaborator(collaborator_payload.getFirst_name(), collaborator_payload.getLast_name(), collaborator_payload.getType(), country);
+		return collaboratorRepo.save(new_collaborator);
 	}
 	
 	public Collaborator updateCollaborator(Collaborator nuevo,Long id) {

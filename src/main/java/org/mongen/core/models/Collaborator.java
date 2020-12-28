@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,6 +46,10 @@ public class Collaborator implements Serializable{
 	public Collaborator() {
 		
 	}
+
+	public Collaborator(String first_name, String last_name, String type, Optional<Country> country) {
+	}
+
 	@PrePersist
     protected void onCreate(){
         this.created = new Date();

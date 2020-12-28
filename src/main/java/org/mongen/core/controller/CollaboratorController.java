@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.mongen.core.models.Collaborator;
 import org.mongen.core.models.CollaboratorType;
-import org.mongen.core.models.DisabilityType;
+import org.mongen.core.models.payloads.CollaboratorPayload;
 import org.mongen.core.service.CollaboratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,9 +50,9 @@ public class CollaboratorController {
 	
 	@ApiOperation(value = "Create a Collaborator")
 	@PostMapping("/collaborators")
-	public ResponseEntity<Collaborator> createCollaborator(@RequestBody Collaborator collaborator){
-		Collaborator cola = collaboratorServ.createCollaborator(collaborator);
-		return ResponseEntity.status(HttpStatus.CREATED).body(cola);
+	public ResponseEntity<Collaborator> createCollaborator(@RequestBody CollaboratorPayload collaborator){
+		Collaborator new_collaborator = collaboratorServ.createCollaborator(collaborator);
+		return ResponseEntity.status(HttpStatus.CREATED).body(new_collaborator);
 	}
 	
 	@ApiOperation(value = "Update a Collaborator")
