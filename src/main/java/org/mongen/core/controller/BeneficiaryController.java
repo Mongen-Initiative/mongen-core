@@ -58,5 +58,4 @@ public class BeneficiaryController {
 		beneficiaryServ.deleteBeneficiary(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Delete Beneficiary with ID: " + id);
 	}
-	
 }

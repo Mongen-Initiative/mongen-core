@@ -20,9 +20,11 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 @Entity
 @Table(name="beneficiary")
+@Data
 public class Beneficiary implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,13 +75,17 @@ public class Beneficiary implements Serializable{
     )
     private List<Disability> disabilities;
 	
-	@JsonIgnoreProperties(value={"beneficiaries","created","id","updated","donors","institution","colaborators","supporters"})
+	@JsonIgnoreProperties(value={"beneficiaries","created","id","updated","donors","institution","collaborators","supporters"})
 	@ManyToOne
-	@JoinColumn(name="country_code")
+	@JoinColumn(name="country_iso")
 	private Country country;
-	
+
+	@ManyToOne
+	@JoinColumn(name="street_situation")
+	private StreetSituation street_situation;
+
 	public Beneficiary() {
-		
+
 	}
 	
 	@PrePersist
@@ -92,124 +98,4 @@ public class Beneficiary implements Serializable{
         this.updated = new Date();
     }
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-
-	public Date getBirth() {
-		return birth;
-	}
-
-	public void setBirth(Date birth) {
-		this.birth = birth;
-	}
-
-	public Integer getHeight() {
-		return height;
-	}
-
-	public void setHeight(Integer height) {
-		this.height = height;
-	}
-
-	public Integer getWeight() {
-		return weight;
-	}
-
-	public void setWeight(Integer weight) {
-		this.weight = weight;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public Date getCreated() {
-		return created;
-	}
-
-	public void setCreated(Date created) {
-		this.created = created;
-	}
-
-	public Date getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(Date updated) {
-		this.updated = updated;
-	}
-
-	public Country getCountry() {
-		return country;
-	}
-
-	public void setCountry(Country country) {
-		this.country = country;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public List<Institution> getInstitutions() {
-		return institutions;
-	}
-
-	public void setInstitutions(List<Institution> institutions) {
-		this.institutions = institutions;
-	}
-
-	public List<Disability> getDisabilities() {
-		return disabilities;
-	}
-
-	public void setDisabilities(List<Disability> disabilities) {
-		this.disabilities = disabilities;
-	}
-
-	public List<Donor> getDonors() {
-		return donors;
-	}
-
-	public void setDonors(List<Donor> donors) {
-		this.donors = donors;
-	}
-	
 }

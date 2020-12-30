@@ -1,7 +1,11 @@
 package org.mongen.core.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +19,8 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="colaborator")
+@Table(name="collaborator")
+@Data
 public class Collaborator implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,17 +29,31 @@ public class Collaborator implements Serializable{
 	private String firstName;
 	@Column(name="last_name")
 	private String lastName;
+	@JsonIgnore
 	@Column(updatable=false)
 	private Date created;
+	@JsonIgnore
 	private Date updated;
 	
 	@ManyToOne
-	@JoinColumn(name="country_code")
-	private Country countryColaborator;
+	@JoinColumn(name="country_iso")
+	private Country countryCollaborator;
+
+	@ManyToOne
+	@JoinColumn(name="type")
+	private CollaboratorType type;
 	
 	public Collaborator() {
 		
 	}
+
+	public Collaborator(String first_name, String last_name, CollaboratorType type, Country country) {
+		this.firstName = first_name;
+		this.lastName = last_name;
+		this.type = type;
+		this.countryCollaborator = country;
+	}
+
 	@PrePersist
     protected void onCreate(){
         this.created = new Date();
@@ -44,40 +63,5 @@ public class Collaborator implements Serializable{
     protected void onUpdate(){
         this.updated = new Date();
     }
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public Date getCreated() {
-		return created;
-	}
-	public void setCreated(Date created) {
-		this.created = created;
-	}
-	public Date getUpdated() {
-		return updated;
-	}
-	public void setUpdated(Date updated) {
-		this.updated = updated;
-	}
-	public Country getCountryColaborator() {
-		return countryColaborator;
-	}
-	public void setCountryColaborator(Country countryColaborator) {
-		this.countryColaborator = countryColaborator;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+
 }

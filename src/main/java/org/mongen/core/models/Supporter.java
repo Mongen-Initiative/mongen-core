@@ -1,5 +1,7 @@
 package org.mongen.core.models;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,6 +18,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="supporter")
+@Data
 public class Supporter implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +31,7 @@ public class Supporter implements Serializable{
 	private Date updated;
 	
 	@ManyToOne
-	@JoinColumn(name="country_code")
+	@JoinColumn(name="country_iso")
 	private Country countrySupporter;
 	
 	public Supporter() {
@@ -45,52 +48,4 @@ public class Supporter implements Serializable{
         this.updated = new Date();
     }
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public Date getCreated() {
-		return created;
-	}
-
-	public void setCreated(Date created) {
-		this.created = created;
-	}
-
-	public Date getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(Date updated) {
-		this.updated = updated;
-	}
-
-	public Country getCountrySupporter() {
-		return countrySupporter;
-	}
-
-	public void setCountrySupporter(Country countrySupporter) {
-		this.countrySupporter = countrySupporter;
-	}
-	
 }

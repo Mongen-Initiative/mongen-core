@@ -1,39 +1,34 @@
 package org.mongen.core.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
-
 @Entity
-@Table(name="disability_type")
+@Table(name="collaborator_type")
 @Data
-public class DisabilityType implements Serializable{
-	
+public class CollaboratorType implements Serializable{
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	
+
+	@JsonIgnore
 	@Column(updatable=false)
 	private Date created;
+	@JsonIgnore
 	private Date updated;
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy="type")
-	private List<Disability> disabilities;
-	
-	public DisabilityType() {
+	private List<Collaborator> collaborators;
+
+	public CollaboratorType() {
 	}
 	@PrePersist
     protected void onCreate(){
