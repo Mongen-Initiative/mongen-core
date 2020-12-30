@@ -47,7 +47,11 @@ public class Collaborator implements Serializable{
 		
 	}
 
-	public Collaborator(String first_name, String last_name, String type, Optional<Country> country) {
+	public Collaborator(String first_name, String last_name, CollaboratorType type, Country country) {
+		this.firstName = first_name;
+		this.lastName = last_name;
+		this.type = type;
+		this.countryCollaborator = country;
 	}
 
 	@PrePersist

@@ -36,8 +36,9 @@ public class CollaboratorService {
 	}
 	
 	public Collaborator createCollaborator(CollaboratorPayload collaborator_payload) {
-		Optional<Country> country = countryRepo.findByCountryISO(collaborator_payload.getCountry_iso());
-		Collaborator new_collaborator = new Collaborator(collaborator_payload.getFirst_name(), collaborator_payload.getLast_name(), collaborator_payload.getType(), country);
+		Country country = countryRepo.findByCountryISO(collaborator_payload.getCountry_iso());
+		CollaboratorType type = collaboratorTypeRepo.findByName(collaborator_payload.getType());
+		Collaborator new_collaborator = new Collaborator(collaborator_payload.getFirst_name(), collaborator_payload.getLast_name(), type, country);
 		return collaboratorRepo.save(new_collaborator);
 	}
 	

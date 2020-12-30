@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface CountryRepository extends CrudRepository<Country,Long>{
 	List<Country> findAll();
 
-	Optional<Country> findByCountryISO(String countryISO);
+	Country findByCountryISO(String countryISO);
 
 	void deleteByCountryISO(String countryISO);
 }

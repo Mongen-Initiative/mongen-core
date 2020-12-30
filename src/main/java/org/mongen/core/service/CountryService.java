@@ -18,7 +18,7 @@ public class CountryService {
 	}
 	
 	public Country findCountryById(String countryISO) {
-		Optional<Country> temp = countryRepo.findByCountryISO(countryISO);
+		Optional<Country> temp = Optional.ofNullable(countryRepo.findByCountryISO(countryISO));
 		if(temp.isPresent()) {
 			return temp.get();
 		} else {
