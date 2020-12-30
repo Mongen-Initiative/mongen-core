@@ -49,7 +49,16 @@ public class Organization implements Serializable{
 	public Organization() {
 		
 	}
-	
+
+	public Organization(String name, String mission, String vision, String address, Country country, Collaborator contact) {
+		this.name = name;
+		this.mission = mission;
+		this.vision = vision;
+		this.address = address;
+		this.country = country;
+		this.collaborator = contact;
+	}
+
 	@PrePersist
     protected void onCreate(){
         this.created = new Date();

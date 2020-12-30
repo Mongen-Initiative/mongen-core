@@ -2,6 +2,7 @@ package org.mongen.core.controller;
 
 import io.swagger.annotations.ApiOperation;
 import org.mongen.core.models.Organization;
+import org.mongen.core.models.payloads.OrganizationPayload;
 import org.mongen.core.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,7 @@ public class OrganizationController {
 	
 	@ApiOperation(value = "Create a Organization")
 	@PostMapping("/organization")
-	public ResponseEntity<Organization> createOrganization(@RequestBody Organization org){
+	public ResponseEntity<Organization> createOrganization(@RequestBody OrganizationPayload org){
 		Organization bene = organizationServ.createOrganization(org);
 		return ResponseEntity.status(HttpStatus.CREATED).body(bene);
 	}

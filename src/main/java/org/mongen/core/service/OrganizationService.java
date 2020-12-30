@@ -1,6 +1,12 @@
 package org.mongen.core.service;
 
+import org.mongen.core.models.Collaborator;
+import org.mongen.core.models.CollaboratorType;
+import org.mongen.core.models.Country;
 import org.mongen.core.models.Organization;
+import org.mongen.core.models.payloads.OrganizationPayload;
+import org.mongen.core.repository.CollaboratorRepository;
+import org.mongen.core.repository.CountryRepository;
 import org.mongen.core.repository.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +18,10 @@ import java.util.Optional;
 public class OrganizationService {
 	@Autowired
 	OrganizationRepository organizationRepo;
+	@Autowired
+	CountryRepository countryRepo;
+	@Autowired
+	CollaboratorService collaboratorServ;
 	
 	public List<Organization> getOrganizations(){
 		return organizationRepo.findAll();
@@ -26,8 +36,11 @@ public class OrganizationService {
 		}
 	}
 	
-	public Organization createOrganization(Organization nuevo) {
-		return organizationRepo.save(nuevo);
+	public Organization createOrganization(OrganizationPayload org_payload) {
+		Country country = countryRepo.findByCountryISO(org_payload.getCountry_iso());
+		Collaborator contact = collaboratorServ.findCollaboratorById(org_payload.getContact_id());
+		Organization new_org = new Organization(org_payload.getName(), org_payload.getMission(), org_payload.getVision(), org_payload.getAddress(), country, contact);
+		return organizationRepo.save(new_org);
 	}
 	
 	public Organization updateOrganization(Organization nuevo, Long id) {
