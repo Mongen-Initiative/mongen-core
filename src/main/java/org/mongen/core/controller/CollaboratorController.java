@@ -5,6 +5,7 @@ import java.util.List;
 import org.mongen.core.models.Collaborator;
 import org.mongen.core.models.CollaboratorType;
 import org.mongen.core.models.payloads.CollaboratorPayload;
+import org.mongen.core.models.payloads.MainContactPayload;
 import org.mongen.core.service.CollaboratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,6 +54,13 @@ public class CollaboratorController {
 	public ResponseEntity<Collaborator> createCollaborator(@RequestBody CollaboratorPayload collaborator){
 		Collaborator new_collaborator = collaboratorServ.createCollaborator(collaborator);
 		return ResponseEntity.status(HttpStatus.CREATED).body(new_collaborator);
+	}
+
+	@ApiOperation(value = "Create a Main Contact")
+	@PostMapping("/main_contact")
+	public ResponseEntity<Collaborator> createCollaborator(@RequestBody MainContactPayload main_contact){
+		Collaborator new_main_contact = collaboratorServ.createMainContact(main_contact);
+		return ResponseEntity.status(HttpStatus.CREATED).body(new_main_contact);
 	}
 	
 	@ApiOperation(value = "Update a Collaborator")
