@@ -11,8 +11,8 @@
 	<groupId>org.mongen</groupId>
 	<artifactId>core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>street-priest</name>
-	<description>Street priest Backend</description>
+	<name>mongen-core</name>
+	<description>Mongen - Core Service</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -42,6 +42,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -81,8 +82,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludeDevtools>false</excludeDevtools>
+				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>mongen-core</finalName>
 	</build>
 
 </project>
