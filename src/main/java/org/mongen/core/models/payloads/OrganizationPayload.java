@@ -6,6 +6,7 @@ import lombok.Data;
 public class OrganizationPayload {
 
 	private String name;
+	private String seo_name;
 	private String address;
 	private String mission;
 	private String vision;

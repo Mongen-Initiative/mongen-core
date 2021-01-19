@@ -31,8 +31,6 @@ public class Collaborator implements Serializable{
 	private String lastName;
 	@Column(name="photo_id_url")
 	private String photoIdURL;
-	@Column(name="verification_selfie_url")
-	private String verificationSelfieURL;
 	@JsonIgnore
 	@Column(updatable=false)
 	private Date created;
@@ -58,11 +56,10 @@ public class Collaborator implements Serializable{
 		this.countryCollaborator = country;
 	}
 
-	public Collaborator(String first_name, String last_name, String photo_id_url, String verification_selfie_url, CollaboratorType type, Country country) {
+	public Collaborator(String first_name, String last_name, String photo_id_url, CollaboratorType type, Country country) {
 		this.firstName = first_name;
 		this.lastName = last_name;
 		this.photoIdURL = photo_id_url;
-		this.verificationSelfieURL = verification_selfie_url;
 		this.type = type;
 		this.countryCollaborator = country;
 	}
