@@ -19,8 +19,7 @@ public class MongenCoreService {
 		return new WebMvcConfigurerAdapter() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/api/v1/countries").allowedOrigins("http://localhost:3000");
-				registry.addMapping("/api/v1/collaborators/type").allowedOrigins("http://localhost:3000");
+				registry.addMapping("/**").allowedOrigins("*");
 			}
 		};
 	}
