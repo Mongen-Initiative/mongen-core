@@ -46,7 +46,7 @@ public class CollaboratorService {
 	public Collaborator createMainContact(MainContactPayload main_contact_payload) {
 		Country country = countryRepo.findByCountryISO(main_contact_payload.getCountry_iso());
 		CollaboratorType type = collaboratorTypeRepo.findByName(main_contact_payload.getType());
-		Collaborator new_collaborator = new Collaborator(main_contact_payload.getFirst_name(), main_contact_payload.getLast_name(), main_contact_payload.getPhoto_id_url(), main_contact_payload.getVerification_selfie_url(), type, country);
+		Collaborator new_collaborator = new Collaborator(main_contact_payload.getFirst_name(), main_contact_payload.getLast_name(), main_contact_payload.getPhoto_id_url(), type, country);
 		return collaboratorRepo.save(new_collaborator);
 	}
 	

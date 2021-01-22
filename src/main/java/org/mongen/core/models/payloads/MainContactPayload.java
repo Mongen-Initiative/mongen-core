@@ -10,5 +10,4 @@ public class MainContactPayload {
 	private String country_iso;
 	private String type;
 	private String photo_id_url;
-	private String verification_selfie_url;
 }
