@@ -3,6 +3,7 @@ package org.mongen.core.controller;
 import java.util.List;
 
 import org.mongen.core.models.Beneficiary;
+import org.mongen.core.models.payloads.BeneficiaryPayload;
 import org.mongen.core.service.BeneficiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,7 +41,7 @@ public class BeneficiaryController {
 	
 	@ApiOperation(value = "Create a Beneficiary")
 	@PostMapping("/beneficiaries")
-	public ResponseEntity<Beneficiary> createBeneficiary(@RequestBody Beneficiary beneficiary){
+	public ResponseEntity<Beneficiary> createBeneficiary(@RequestBody BeneficiaryPayload beneficiary){
 		Beneficiary bene = beneficiaryServ.createBeneficiary(beneficiary);
 		return ResponseEntity.status(HttpStatus.CREATED).body(bene);
 	}
