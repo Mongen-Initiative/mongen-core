@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface OrganizationRepository extends CrudRepository<Organization,Long>{
 	List<Organization> findAll();
+
+	Organization findBySeoName(String SeoName);
 }

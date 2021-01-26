@@ -19,7 +19,7 @@ public class Organization implements Serializable{
 	@Column(name="name")
 	private String name;
 	@Column(name="seo_name")
-	private String SeoName;
+	private String seoName;
 	private boolean verified;
 	private String address;
 	private String mission;
@@ -54,7 +54,7 @@ public class Organization implements Serializable{
 
 	public Organization(String name, String seo_name, String mission, String vision, String address, Country country, Collaborator contact) {
 		this.name = name;
-		this.SeoName = seo_name;
+		this.seoName = seo_name;
 		this.mission = mission;
 		this.vision = vision;
 		this.address = address;

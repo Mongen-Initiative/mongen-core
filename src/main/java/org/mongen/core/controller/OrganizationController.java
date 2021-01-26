@@ -3,6 +3,7 @@ package org.mongen.core.controller;
 import io.swagger.annotations.ApiOperation;
 import org.mongen.core.models.Organization;
 import org.mongen.core.models.payloads.OrganizationPayload;
+import org.mongen.core.models.responses.OrganizationResponse;
 import org.mongen.core.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,9 +27,18 @@ public class OrganizationController {
 	
 	@ApiOperation(value = "Get one Organization")
 	@GetMapping("/organization/{id}")
-	public ResponseEntity<Organization> getOrganizationId(@PathVariable("id") Long id){
-		Organization bene = organizationServ.findOrganizationById(id);
-		return ResponseEntity.status(HttpStatus.OK).body(bene);
+	public ResponseEntity<OrganizationResponse> getOrganizationId(@PathVariable("id") Long id){
+		Organization org = organizationServ.findOrganizationById(id);
+		OrganizationResponse org_resp = organizationServ.generateOrganizationResponse(org);
+		return ResponseEntity.status(HttpStatus.OK).body(org_resp);
+	}
+
+	@ApiOperation(value = "Get one Organization by SEO name")
+	@GetMapping("/organization/seo_name/{seo_name}")
+	public ResponseEntity<OrganizationResponse> getOrganizationSeoName(@PathVariable("seo_name") String seo_name){
+		Organization org = organizationServ.findOrganizationBySeoName(seo_name);
+		OrganizationResponse org_resp = organizationServ.generateOrganizationResponse(org);
+		return ResponseEntity.status(HttpStatus.OK).body(org_resp);
 	}
 	
 	@ApiOperation(value = "Create a Organization")
