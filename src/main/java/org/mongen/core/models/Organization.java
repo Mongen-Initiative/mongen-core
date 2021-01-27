@@ -19,7 +19,7 @@ public class Organization implements Serializable{
 	@Column(name="name")
 	private String name;
 	@Column(name="seo_name")
-	private String SeoName;
+	private String seoName;
 	private boolean verified;
 	private String address;
 	private String mission;
@@ -46,7 +46,15 @@ public class Organization implements Serializable{
 			joinColumns = @JoinColumn(name = "organization_id"),
 			inverseJoinColumns = @JoinColumn(name = "collaborator_id")
 	)
-	private List<Beneficiary> collaborators;
+	private List<Collaborator> collaborators;
+
+	@ManyToMany
+	@JoinTable(
+			name = "organization_beneficiaries",
+			joinColumns = @JoinColumn(name = "organization_id"),
+			inverseJoinColumns = @JoinColumn(name = "beneficiary_id")
+	)
+	private List<Beneficiary> beneficiaries;
 
 	public Organization() {
 		
@@ -54,7 +62,7 @@ public class Organization implements Serializable{
 
 	public Organization(String name, String seo_name, String mission, String vision, String address, Country country, Collaborator contact) {
 		this.name = name;
-		this.SeoName = seo_name;
+		this.seoName = seo_name;
 		this.mission = mission;
 		this.vision = vision;
 		this.address = address;

@@ -37,7 +37,7 @@ public class Beneficiary implements Serializable{
 	private String gender;
 	private Integer age;
 	@Column(name="date_of_birth")
-	private Date birth;
+	private Date dateOfBirth;
 	private Integer height;
 	private Integer weight;
 	private String address;
@@ -86,6 +86,31 @@ public class Beneficiary implements Serializable{
 
 	public Beneficiary() {
 
+	}
+
+	public Beneficiary(
+			String first_name,
+			String last_name,
+			String gender,
+			Date date_of_birth,
+			Integer height,
+			Integer weight,
+			String address,
+//			Integer[] disability_ids,
+//			Integer street_situation_id,
+		    Country country
+	) {
+
+		this.firstName = first_name;
+		this.lastName = last_name;
+		this.gender = gender;
+		this.dateOfBirth = date_of_birth;
+		this.height = height;
+		this.weight = weight;
+		this.address = address;
+		this.country = country;
+//		this.street_situation = street_situation_id;
+//		this.disabilities = disability_ids;
 	}
 	
 	@PrePersist

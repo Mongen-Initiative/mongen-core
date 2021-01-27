@@ -5,6 +5,7 @@ import org.mongen.core.models.CollaboratorType;
 import org.mongen.core.models.Country;
 import org.mongen.core.models.Organization;
 import org.mongen.core.models.payloads.OrganizationPayload;
+import org.mongen.core.models.responses.OrganizationResponse;
 import org.mongen.core.repository.CollaboratorRepository;
 import org.mongen.core.repository.CountryRepository;
 import org.mongen.core.repository.OrganizationRepository;
@@ -35,6 +36,15 @@ public class OrganizationService {
 			return null;
 		}
 	}
+
+	public Organization findOrganizationBySeoName(String seo_name) {
+		Optional<Organization> temp = Optional.ofNullable(organizationRepo.findBySeoName(seo_name));
+		if(temp.isPresent()) {
+			return temp.get();
+		} else {
+			return null;
+		}
+	}
 	
 	public Organization createOrganization(OrganizationPayload org_payload) {
 		Country country = countryRepo.findByCountryISO(org_payload.getCountry_iso());
@@ -46,6 +56,11 @@ public class OrganizationService {
 	public Organization updateOrganization(Organization nuevo, Long id) {
 		nuevo.setId(id);
 		return organizationRepo.save(nuevo);
+	}
+
+	public OrganizationResponse generateOrganizationResponse(Organization org){
+		OrganizationResponse org_resp = new OrganizationResponse(org);
+		return org_resp;
 	}
 	
 	public void deleteOrganization(Long id) {
