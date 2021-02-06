@@ -6,6 +6,8 @@ import org.mongen.core.models.Collaborator;
 import org.mongen.core.models.CollaboratorType;
 import org.mongen.core.models.payloads.CollaboratorPayload;
 import org.mongen.core.models.payloads.MainContactPayload;
+import org.mongen.core.models.responses.CollaboratorResponse;
+import org.mongen.core.models.responses.MainContactResponse;
 import org.mongen.core.service.CollaboratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,14 +45,21 @@ public class CollaboratorController {
 	}
 	
 	@ApiOperation(value = "Get one Collaborator")
-	@GetMapping("/collaborators/{id}")
-	public ResponseEntity<Collaborator> getCollaboratorId(@PathVariable("id") Long id){
-		Collaborator cola = collaboratorServ.findCollaboratorById(id);
+	@GetMapping("/collaborator/{id}")
+	public ResponseEntity<CollaboratorResponse> getCollaboratorId(@PathVariable("id") Long id){
+		CollaboratorResponse cola = new CollaboratorResponse(collaboratorServ.findCollaboratorById(id));
+		return ResponseEntity.status(HttpStatus.OK).body(cola);
+	}
+
+	@ApiOperation(value = "Get one Main Contact")
+	@GetMapping("/main_contact/{id}")
+	public ResponseEntity<MainContactResponse> getMainContactId(@PathVariable("id") Long id){
+		MainContactResponse cola = new MainContactResponse(collaboratorServ.findCollaboratorById(id));
 		return ResponseEntity.status(HttpStatus.OK).body(cola);
 	}
 	
 	@ApiOperation(value = "Create a Collaborator")
-	@PostMapping("/collaborators")
+	@PostMapping("/collaborator")
 	public ResponseEntity<Collaborator> createCollaborator(@RequestBody CollaboratorPayload collaborator){
 		Collaborator new_collaborator = collaboratorServ.createCollaborator(collaborator);
 		return ResponseEntity.status(HttpStatus.CREATED).body(new_collaborator);
@@ -64,14 +73,14 @@ public class CollaboratorController {
 	}
 	
 	@ApiOperation(value = "Update a Collaborator")
-	@PatchMapping("/collaborators/{id}")
+	@PatchMapping("/collaborator/{id}")
 	public ResponseEntity<Collaborator> updateCollaborator(@PathVariable("id") Long id, @RequestBody Collaborator collaborator){
 		Collaborator cola = collaboratorServ.updateCollaborator(collaborator, id);
 		return ResponseEntity.status(HttpStatus.OK).body(cola);
 	}
 	
 	@ApiOperation(value = "Delete a Collaborator")
-	@DeleteMapping("/collaborators/{id}")
+	@DeleteMapping("/collaborator/{id}")
 	public ResponseEntity<?> deleteCollaborator(@PathVariable("id") Long id){
 		collaboratorServ.deleteCollaborator(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Delete Collaborator with ID: " + id);

@@ -39,14 +39,14 @@ public class CollaboratorService {
 	public Collaborator createCollaborator(CollaboratorPayload collaborator_payload) {
 		Country country = countryRepo.findByCountryISO(collaborator_payload.getCountry_iso());
 		CollaboratorType type = collaboratorTypeRepo.findByName(collaborator_payload.getType());
-		Collaborator new_collaborator = new Collaborator(collaborator_payload.getFirst_name(), collaborator_payload.getLast_name(), type, country);
+		Collaborator new_collaborator = new Collaborator(collaborator_payload.getFirst_name(), collaborator_payload.getLast_name(), collaborator_payload.getEmail(), type, country);
 		return collaboratorRepo.save(new_collaborator);
 	}
 
 	public Collaborator createMainContact(MainContactPayload main_contact_payload) {
 		Country country = countryRepo.findByCountryISO(main_contact_payload.getCountry_iso());
 		CollaboratorType type = collaboratorTypeRepo.findByName(main_contact_payload.getType());
-		Collaborator new_collaborator = new Collaborator(main_contact_payload.getFirst_name(), main_contact_payload.getLast_name(), main_contact_payload.getPhoto_id_url(), type, country);
+		Collaborator new_collaborator = new Collaborator(main_contact_payload.getFirst_name(), main_contact_payload.getLast_name(), main_contact_payload.getEmail(), main_contact_payload.getPhoto_id_url(), type, country);
 		return collaboratorRepo.save(new_collaborator);
 	}
 	
