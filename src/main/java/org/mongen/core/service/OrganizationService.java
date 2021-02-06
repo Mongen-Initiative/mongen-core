@@ -49,7 +49,7 @@ public class OrganizationService {
 	public Organization createOrganization(OrganizationPayload org_payload) {
 		Country country = countryRepo.findByCountryISO(org_payload.getCountry_iso());
 		Collaborator contact = collaboratorServ.findCollaboratorById(org_payload.getContact_id());
-		Organization new_org = new Organization(org_payload.getName(), org_payload.getSeo_name(), org_payload.getMission(), org_payload.getVision(), org_payload.getAddress(), country, contact);
+		Organization new_org = new Organization(org_payload.getName(), org_payload.getSeo_name(), org_payload.getStory(), org_payload.getMission(), org_payload.getVision(), org_payload.getAddress(), country, contact);
 		return organizationRepo.save(new_org);
 	}
 	

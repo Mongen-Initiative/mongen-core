@@ -22,6 +22,7 @@ public class Organization implements Serializable{
 	private String seoName;
 	private boolean verified;
 	private String address;
+	private String story;
 	private String mission;
 	private String vision;
 
@@ -60,9 +61,10 @@ public class Organization implements Serializable{
 		
 	}
 
-	public Organization(String name, String seo_name, String mission, String vision, String address, Country country, Collaborator contact) {
+	public Organization(String name, String seo_name, String story, String mission, String vision, String address, Country country, Collaborator contact) {
 		this.name = name;
 		this.seoName = seo_name;
+		this.story = story;
 		this.mission = mission;
 		this.vision = vision;
 		this.address = address;

@@ -13,9 +13,10 @@ public class OrganizationResponse {
 	private String name;
 	private String seo_name;
 	private String address;
+	private String story;
 	private String mission;
 	private String vision;
-	private Collaborator main_contact;
+	private MainContactResponse main_contact;
 	private boolean verified;
 	private Date created;
 	private Date updated;
@@ -26,9 +27,10 @@ public class OrganizationResponse {
 		this.name = org.getName();
 		this.seo_name = org.getSeoName();
 		this.address = org.getAddress();
+		this.story = org.getStory();
 		this.mission = org.getMission();
 		this.vision = org.getVision();
-		this.main_contact = org.getCollaborator();
+		this.main_contact = new MainContactResponse(org.getCollaborator()) ;
 		this.verified = org.isVerified();
 		this.created = org.getCreated();
 		this.updated = org.getUpdated();

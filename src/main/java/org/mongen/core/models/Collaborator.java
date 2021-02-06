@@ -29,6 +29,7 @@ public class Collaborator implements Serializable{
 	private String firstName;
 	@Column(name="last_name")
 	private String lastName;
+	private String email;
 	@Column(name="photo_id_url")
 	private String photoIdURL;
 	@JsonIgnore
@@ -49,16 +50,18 @@ public class Collaborator implements Serializable{
 		
 	}
 
-	public Collaborator(String first_name, String last_name, CollaboratorType type, Country country) {
+	public Collaborator(String first_name, String last_name, String email, CollaboratorType type, Country country) {
 		this.firstName = first_name;
 		this.lastName = last_name;
+		this.email = email;
 		this.type = type;
 		this.countryCollaborator = country;
 	}
 
-	public Collaborator(String first_name, String last_name, String photo_id_url, CollaboratorType type, Country country) {
+	public Collaborator(String first_name, String last_name, String email, String photo_id_url, CollaboratorType type, Country country) {
 		this.firstName = first_name;
 		this.lastName = last_name;
+		this.email = email;
 		this.photoIdURL = photo_id_url;
 		this.type = type;
 		this.countryCollaborator = country;
