@@ -11,9 +11,10 @@ public class OrganizationPayload {
 	private String seo_name;
 	private String logo_url;
 	private String address;
+	private String social_network_url;
 	private String mission;
 	private String vision;
 	private String country_iso;
 	private Long contact_id;
-	private ArrayList<SocialMediaPayload> social_media;
+//	private ArrayList<SocialMediaPayload> social_media;
 }
