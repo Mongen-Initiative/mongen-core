@@ -5,6 +5,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -18,10 +20,14 @@ public class Organization implements Serializable{
 	private Long id;
 	@Column(name="name")
 	private String name;
+	@Column(name="logo_url")
+	private String logoUrl;
 	@Column(name="seo_name")
 	private String seoName;
 	private boolean verified;
 	private String address;
+	@Column(name="social_network_url")
+	private String socialNetworkUrl;
 	private String story;
 	private String mission;
 	private String vision;
@@ -40,6 +46,10 @@ public class Organization implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="contact")
 	private Collaborator collaborator;
+
+//	@OneToMany
+//	@JoinColumn(name="social_media")
+//	private Collection<SocialMedia> social_media;
 
 	@ManyToMany
 	@JoinTable(
@@ -61,13 +71,15 @@ public class Organization implements Serializable{
 		
 	}
 
-	public Organization(String name, String seo_name, String story, String mission, String vision, String address, Country country, Collaborator contact) {
+	public Organization(String name, String seo_name, String logo_url, String story, String mission, String vision, String address, String social_network_url, Country country, Collaborator contact) {
 		this.name = name;
 		this.seoName = seo_name;
+		this.logoUrl = logo_url;
 		this.story = story;
 		this.mission = mission;
 		this.vision = vision;
 		this.address = address;
+		this.socialNetworkUrl = social_network_url;
 		this.country = country;
 		this.collaborator = contact;
 	}

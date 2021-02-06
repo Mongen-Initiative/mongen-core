@@ -12,7 +12,9 @@ public class OrganizationResponse {
 	private Long id;
 	private String name;
 	private String seo_name;
+	private String logo_url;
 	private String address;
+	private String social_network_url;
 	private String story;
 	private String mission;
 	private String vision;
@@ -26,7 +28,9 @@ public class OrganizationResponse {
 		this.id = org.getId();
 		this.name = org.getName();
 		this.seo_name = org.getSeoName();
+		this.logo_url = org.getLogoUrl();
 		this.address = org.getAddress();
+		this.social_network_url = org.getSocialNetworkUrl();
 		this.story = org.getStory();
 		this.mission = org.getMission();
 		this.vision = org.getVision();

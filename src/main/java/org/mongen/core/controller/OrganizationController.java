@@ -44,8 +44,8 @@ public class OrganizationController {
 	@ApiOperation(value = "Create a Organization")
 	@PostMapping("/organization")
 	public ResponseEntity<Organization> createOrganization(@RequestBody OrganizationPayload org){
-		Organization bene = organizationServ.createOrganization(org);
-		return ResponseEntity.status(HttpStatus.CREATED).body(bene);
+		Organization new_org = organizationServ.createOrganization(org);
+		return ResponseEntity.status(HttpStatus.CREATED).body(new_org);
 	}
 	
 	@ApiOperation(value = "Update a Organization")
