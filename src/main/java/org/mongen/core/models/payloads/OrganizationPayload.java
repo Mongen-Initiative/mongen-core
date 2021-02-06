@@ -12,6 +12,7 @@ public class OrganizationPayload {
 	private String logo_url;
 	private String address;
 	private String social_network_url;
+	private String story;
 	private String mission;
 	private String vision;
 	private String country_iso;
