@@ -74,7 +74,7 @@ public class Organization implements Serializable{
 	public Organization(String name, String seo_name, String logo_url, String story, String mission, String vision, String address, String social_network_url, Country country, Collaborator contact) {
 		this.name = name;
 		this.seoName = seo_name;
-    this.logoUrl = logo_url;
+		this.logoUrl = logo_url;
 		this.story = story;
 		this.mission = mission;
 		this.vision = vision;
