@@ -21,8 +21,17 @@ public class OrganizationController {
 	@ApiOperation(value = "Get All the Organizations")
 	@GetMapping("/organizations")
 	public ResponseEntity<List<Organization>> getOrganizations(){
-		List<Organization> bene = organizationServ.getOrganizations();
-		return ResponseEntity.status(HttpStatus.OK).body(bene);
+		List<Organization> orgs = organizationServ.getOrganizations();
+		return ResponseEntity.status(HttpStatus.OK).body(orgs);
+	}
+
+	@ApiOperation(value = "Get Organizations by verified state")
+	@GetMapping("/organizations/verified/{state}")
+	public ResponseEntity<List<Organization>> getOrganizationsByVerifiedState(@PathVariable("state") Boolean state){
+		List<Organization> orgs = organizationServ.findOrganizationByVerified(state);
+//		Attempt to apply a better response for the list of organizations
+//		List<OrganizationResponse> response = organizationServ.generateListOrganizationResponse(orgs);
+		return ResponseEntity.status(HttpStatus.OK).body(orgs);
 	}
 	
 	@ApiOperation(value = "Get one Organization")

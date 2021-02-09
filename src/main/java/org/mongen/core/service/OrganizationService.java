@@ -12,8 +12,11 @@ import org.mongen.core.repository.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.AbstractList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 @Service
 public class OrganizationService {
@@ -45,6 +48,11 @@ public class OrganizationService {
 			return null;
 		}
 	}
+
+	public List<Organization> findOrganizationByVerified(boolean state) {
+		List<Organization> temp = organizationRepo.findByVerifiedIs(state);
+		return temp;
+	}
 	
 	public Organization createOrganization(OrganizationPayload org_payload) {
 		Country country = countryRepo.findByCountryISO(org_payload.getCountry_iso());
@@ -61,6 +69,13 @@ public class OrganizationService {
 	public OrganizationResponse generateOrganizationResponse(Organization org){
 		OrganizationResponse org_resp = new OrganizationResponse(org);
 		return org_resp;
+	}
+
+	public List<OrganizationResponse> generateListOrganizationResponse(List<Organization> orgs){
+		List<OrganizationResponse> org_response = orgs.stream()
+				.map(element-> new OrganizationResponse(element))
+				.collect(Collectors.toList());
+		return org_response;
 	}
 	
 	public void deleteOrganization(Long id) {

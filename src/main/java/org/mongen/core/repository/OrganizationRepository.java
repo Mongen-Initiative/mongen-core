@@ -11,4 +11,6 @@ public interface OrganizationRepository extends CrudRepository<Organization,Long
 	List<Organization> findAll();
 
 	Organization findBySeoName(String SeoName);
+
+	List<Organization> findByVerifiedIs(Boolean verified);
 }
