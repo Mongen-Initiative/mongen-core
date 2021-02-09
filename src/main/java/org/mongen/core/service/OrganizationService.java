@@ -5,6 +5,7 @@ import org.mongen.core.models.CollaboratorType;
 import org.mongen.core.models.Country;
 import org.mongen.core.models.Organization;
 import org.mongen.core.models.payloads.OrganizationPayload;
+import org.mongen.core.models.payloads.OrganizationVerifiedStatusPayload;
 import org.mongen.core.models.responses.OrganizationResponse;
 import org.mongen.core.repository.CollaboratorRepository;
 import org.mongen.core.repository.CountryRepository;
@@ -64,6 +65,16 @@ public class OrganizationService {
 	public Organization updateOrganization(Organization nuevo, Long id) {
 		nuevo.setId(id);
 		return organizationRepo.save(nuevo);
+	}
+
+	public Organization updateVerifiedStatus(OrganizationVerifiedStatusPayload payload, Long id) {
+		Optional<Organization> temp = organizationRepo.findById(id);
+		if(temp.isPresent()) {
+			temp.get().setVerified(payload.getVerified());
+			return organizationRepo.save(temp.get());
+		} else {
+			return null;
+		}
 	}
 
 	public OrganizationResponse generateOrganizationResponse(Organization org){

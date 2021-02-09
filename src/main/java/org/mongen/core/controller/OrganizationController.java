@@ -3,6 +3,7 @@ package org.mongen.core.controller;
 import io.swagger.annotations.ApiOperation;
 import org.mongen.core.models.Organization;
 import org.mongen.core.models.payloads.OrganizationPayload;
+import org.mongen.core.models.payloads.OrganizationVerifiedStatusPayload;
 import org.mongen.core.models.responses.OrganizationResponse;
 import org.mongen.core.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,13 @@ public class OrganizationController {
 	@PatchMapping("/organization/{id}")
 	public ResponseEntity<Organization> updateOrganization(@PathVariable("id") Long id, @RequestBody Organization org){
 		Organization bene = organizationServ.updateOrganization(org, id);
+		return ResponseEntity.status(HttpStatus.OK).body(bene);
+	}
+
+	@ApiOperation(value = "Update verified status of an Organization")
+	@PatchMapping("/set_organization_verified/{id}")
+	public ResponseEntity<Organization> updateVerifiedStatusOrganization(@PathVariable("id") Long id, @RequestBody OrganizationVerifiedStatusPayload payload){
+		Organization bene = organizationServ.updateVerifiedStatus(payload, id);
 		return ResponseEntity.status(HttpStatus.OK).body(bene);
 	}
 	
