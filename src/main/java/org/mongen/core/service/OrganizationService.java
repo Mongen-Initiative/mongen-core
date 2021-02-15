@@ -1,22 +1,18 @@
 package org.mongen.core.service;
 
 import org.mongen.core.models.Collaborator;
-import org.mongen.core.models.CollaboratorType;
 import org.mongen.core.models.Country;
 import org.mongen.core.models.Organization;
 import org.mongen.core.models.payloads.OrganizationPayload;
 import org.mongen.core.models.payloads.OrganizationVerifiedStatusPayload;
 import org.mongen.core.models.responses.OrganizationResponse;
-import org.mongen.core.repository.CollaboratorRepository;
 import org.mongen.core.repository.CountryRepository;
 import org.mongen.core.repository.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.AbstractList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 @Service
@@ -83,9 +79,11 @@ public class OrganizationService {
 	}
 
 	public List<OrganizationResponse> generateListOrganizationResponse(List<Organization> orgs){
+
 		List<OrganizationResponse> org_response = orgs.stream()
-				.map(element-> new OrganizationResponse(element))
+				.map(element-> this.generateOrganizationResponse(element))
 				.collect(Collectors.toList());
+
 		return org_response;
 	}
 	

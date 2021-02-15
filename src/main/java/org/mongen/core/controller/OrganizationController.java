@@ -28,11 +28,10 @@ public class OrganizationController {
 
 	@ApiOperation(value = "Get Organizations by verified state")
 	@GetMapping("/organizations/verified/{state}")
-	public ResponseEntity<List<Organization>> getOrganizationsByVerifiedState(@PathVariable("state") Boolean state){
+	public ResponseEntity<List<OrganizationResponse>> getOrganizationsByVerifiedState(@PathVariable("state") Boolean state){
 		List<Organization> orgs = organizationServ.findOrganizationByVerified(state);
-//		Attempt to apply a better response for the list of organizations
-//		List<OrganizationResponse> response = organizationServ.generateListOrganizationResponse(orgs);
-		return ResponseEntity.status(HttpStatus.OK).body(orgs);
+		List<OrganizationResponse> response = organizationServ.generateListOrganizationResponse(orgs);
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 	
 	@ApiOperation(value = "Get one Organization")
