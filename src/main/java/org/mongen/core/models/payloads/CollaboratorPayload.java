@@ -10,4 +10,5 @@ public class CollaboratorPayload{
 	private String email;
 	private String country_iso;
 	private String type;
+	private Long organization_id;
 }

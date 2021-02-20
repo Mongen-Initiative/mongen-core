@@ -21,9 +21,10 @@ public class OrganizationController {
 	
 	@ApiOperation(value = "Get All the Organizations")
 	@GetMapping("/organizations")
-	public ResponseEntity<List<Organization>> getOrganizations(){
+	public ResponseEntity<List<OrganizationResponse>> getOrganizations(){
 		List<Organization> orgs = organizationServ.getOrganizations();
-		return ResponseEntity.status(HttpStatus.OK).body(orgs);
+		List<OrganizationResponse> response = organizationServ.generateListOrganizationResponse(orgs);
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 
 	@ApiOperation(value = "Get Organizations by verified state")

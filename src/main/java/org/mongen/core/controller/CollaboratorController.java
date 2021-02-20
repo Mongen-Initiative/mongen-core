@@ -32,8 +32,15 @@ public class CollaboratorController {
 	
 	@ApiOperation(value = "Get All the Collaborators")
 	@GetMapping("/collaborators")
-	public ResponseEntity<List<Collaborator>> getCollaborators(){
+	public ResponseEntity<List<Collaborator>> getCoolCollaborators(){
 		List<Collaborator> cola = collaboratorServ.getCollaborators();
+		return ResponseEntity.status(HttpStatus.OK).body(cola);
+	}
+
+	@ApiOperation(value = "Get Collaborators by Organization")
+	@GetMapping("/collaborators/organization_id/{org_id}")
+	public ResponseEntity<List<Collaborator>> getCollaboratorsByOrganization(@PathVariable("org_id") Long org_id){
+		List<Collaborator> cola = collaboratorServ.getCollaboratorsByOrganization(org_id);
 		return ResponseEntity.status(HttpStatus.OK).body(cola);
 	}
 

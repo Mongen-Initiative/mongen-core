@@ -1,16 +1,19 @@
 package org.mongen.core.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.mongen.core.models.Collaborator;
 import org.mongen.core.models.CollaboratorType;
 import org.mongen.core.models.Country;
+import org.mongen.core.models.Organization;
 import org.mongen.core.models.payloads.CollaboratorPayload;
 import org.mongen.core.models.payloads.MainContactPayload;
 import org.mongen.core.repository.CollaboratorRepository;
 import org.mongen.core.repository.CollaboratorTypeRepository;
 import org.mongen.core.repository.CountryRepository;
+import org.mongen.core.repository.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +25,16 @@ public class CollaboratorService {
 	CollaboratorTypeRepository collaboratorTypeRepo;
 	@Autowired
 	CountryRepository countryRepo;
+	@Autowired
+	OrganizationRepository organizationRepo;
 	
 	public List<Collaborator> getCollaborators(){
 		return collaboratorRepo.findAll();
+	}
+
+	public List<Collaborator> getCollaboratorsByOrganization(Long org_id){
+		List<Collaborator> collaborators = organizationRepo.findById(org_id).get().getCollaborators();
+		return collaborators;
 	}
 	
 	public Collaborator findCollaboratorById(Long id) {
@@ -37,9 +47,14 @@ public class CollaboratorService {
 	}
 	
 	public Collaborator createCollaborator(CollaboratorPayload collaborator_payload) {
+		List<Organization> org_list = new ArrayList<>();
 		Country country = countryRepo.findByCountryISO(collaborator_payload.getCountry_iso());
 		CollaboratorType type = collaboratorTypeRepo.findByName(collaborator_payload.getType());
-		Collaborator new_collaborator = new Collaborator(collaborator_payload.getFirst_name(), collaborator_payload.getLast_name(), collaborator_payload.getEmail(), type, country);
+		Optional<Organization> organization = organizationRepo.findById(collaborator_payload.getOrganization_id());
+		org_list.add(organization.get());
+		System.out.println("#### ORG LIST ####");
+		System.out.println(org_list);
+		Collaborator new_collaborator = new Collaborator(collaborator_payload.getFirst_name(), collaborator_payload.getLast_name(), collaborator_payload.getEmail(), type, country, org_list);
 		return collaboratorRepo.save(new_collaborator);
 	}
 
