@@ -47,6 +47,14 @@ public class Beneficiary implements Serializable{
 	private Date created;
 	@ApiModelProperty(hidden=true)
 	private Date updated;
+
+	@ManyToMany
+	@JoinTable(
+			name = "beneficiary_organization",
+			joinColumns = @JoinColumn(name = "beneficiary_id"),
+			inverseJoinColumns = @JoinColumn(name = "organization_id")
+	)
+	List<Organization> organizations;
 	
 	@JsonIgnoreProperties(value={"beneficiaries","created","id","updated"})
 	@ManyToMany
@@ -98,7 +106,8 @@ public class Beneficiary implements Serializable{
 			String address,
 //			Integer[] disability_ids,
 //			Integer street_situation_id,
-		    Country country
+		    Country country,
+			List<Organization> organizations
 	) {
 
 		this.firstName = first_name;
@@ -109,6 +118,7 @@ public class Beneficiary implements Serializable{
 		this.weight = weight;
 		this.address = address;
 		this.country = country;
+		this.organizations = organizations;
 //		this.street_situation = street_situation_id;
 //		this.disabilities = disability_ids;
 	}

@@ -52,8 +52,6 @@ public class CollaboratorService {
 		CollaboratorType type = collaboratorTypeRepo.findByName(collaborator_payload.getType());
 		Optional<Organization> organization = organizationRepo.findById(collaborator_payload.getOrganization_id());
 		org_list.add(organization.get());
-		System.out.println("#### ORG LIST ####");
-		System.out.println(org_list);
 		Collaborator new_collaborator = new Collaborator(collaborator_payload.getFirst_name(), collaborator_payload.getLast_name(), collaborator_payload.getEmail(), type, country, org_list);
 		return collaboratorRepo.save(new_collaborator);
 	}

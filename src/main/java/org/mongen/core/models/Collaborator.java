@@ -39,8 +39,14 @@ public class Collaborator implements Serializable{
 	@JoinColumn(name="type")
 	private CollaboratorType type;
 
-	@ManyToMany(mappedBy = "collaborators")
-	private List<Organization> organizations;
+	@ManyToMany
+	@JoinTable(
+			name = "collaborator_organization",
+			joinColumns = @JoinColumn(name = "collaborator_id"),
+			inverseJoinColumns = @JoinColumn(name = "organization_id")
+	)
+	List<Organization> organizations;
+
 
 	public Collaborator() {
 		

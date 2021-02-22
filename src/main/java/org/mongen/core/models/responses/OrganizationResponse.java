@@ -34,7 +34,7 @@ public class OrganizationResponse {
 		this.story = org.getStory();
 		this.mission = org.getMission();
 		this.vision = org.getVision();
-		this.main_contact = new MainContactResponse(org.getCollaborator()) ;
+		this.main_contact = new MainContactResponse(org.getMain_contact()) ;
 		this.verified = org.isVerified();
 		this.created = org.getCreated();
 		this.updated = org.getUpdated();
