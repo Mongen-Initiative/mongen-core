@@ -17,6 +17,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -48,6 +49,7 @@ public class Beneficiary implements Serializable{
 	@ApiModelProperty(hidden=true)
 	private Date updated;
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(
 			name = "beneficiary_organization",

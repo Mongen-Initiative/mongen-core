@@ -31,4 +31,24 @@ public class CollaboratorResponse {
 		this.created = collaborator.getCreated();
 		this.updated = collaborator.getUpdated();
 	}
+
+	public CollaboratorResponse(
+			long id,
+			String first_name,
+			String last_name,
+			String email,
+			String user_type,
+			Date created,
+			Date updated,
+			String nationality)
+	{
+		this.id = id;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.email = email;
+		this.user_type = user_type;
+		this.nationality = nationality;
+		this.created = created;
+		this.updated = updated;
+	}
 }
