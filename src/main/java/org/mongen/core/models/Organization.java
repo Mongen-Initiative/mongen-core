@@ -1,5 +1,6 @@
 package org.mongen.core.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -32,10 +33,11 @@ public class Organization implements Serializable{
 	private String mission;
 	private String vision;
 
-
+	@JsonIgnore
 	@ApiModelProperty(hidden=true)
 	@Column(updatable=false)
 	private Date created;
+	@JsonIgnore
 	@ApiModelProperty(hidden=true)
 	private Date updated;
 
@@ -45,27 +47,27 @@ public class Organization implements Serializable{
 
 	@ManyToOne
 	@JoinColumn(name="contact")
-	private Collaborator collaborator;
+	private Collaborator main_contact;
 
 //	@OneToMany
 //	@JoinColumn(name="social_media")
 //	private Collection<SocialMedia> social_media;
 
-	@ManyToMany
-	@JoinTable(
-			name = "organization_collaborators",
-			joinColumns = @JoinColumn(name = "organization_id"),
-			inverseJoinColumns = @JoinColumn(name = "collaborator_id")
-	)
+	@JsonIgnore
+	@ManyToMany(mappedBy = "organizations")
 	private List<Collaborator> collaborators;
 
-	@ManyToMany
-	@JoinTable(
-			name = "organization_beneficiaries",
-			joinColumns = @JoinColumn(name = "organization_id"),
-			inverseJoinColumns = @JoinColumn(name = "beneficiary_id")
-	)
+	@JsonIgnore
+	@ManyToMany(mappedBy = "organizations")
 	private List<Beneficiary> beneficiaries;
+
+//	@ManyToMany
+//	@JoinTable(
+//			name = "organization_beneficiaries",
+//			joinColumns = @JoinColumn(name = "organization_id"),
+//			inverseJoinColumns = @JoinColumn(name = "beneficiary_id")
+//	)
+//	private List<Beneficiary> beneficiaries;
 
 	public Organization() {
 		
@@ -81,7 +83,7 @@ public class Organization implements Serializable{
 		this.address = address;
 		this.socialNetworkUrl = social_network_url;
 		this.country = country;
-		this.collaborator = contact;
+		this.main_contact = contact;
 	}
 
 	@PrePersist

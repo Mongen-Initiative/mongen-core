@@ -4,19 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="collaborator")
@@ -45,17 +38,27 @@ public class Collaborator implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="type")
 	private CollaboratorType type;
-	
+
+	@ManyToMany
+	@JoinTable(
+			name = "collaborator_organization",
+			joinColumns = @JoinColumn(name = "collaborator_id"),
+			inverseJoinColumns = @JoinColumn(name = "organization_id")
+	)
+	List<Organization> organizations;
+
+
 	public Collaborator() {
 		
 	}
 
-	public Collaborator(String first_name, String last_name, String email, CollaboratorType type, Country country) {
+	public Collaborator(String first_name, String last_name, String email, CollaboratorType type, Country country, List<Organization> organizations) {
 		this.firstName = first_name;
 		this.lastName = last_name;
 		this.email = email;
 		this.type = type;
 		this.countryCollaborator = country;
+		this.organizations = organizations;
 	}
 
 	public Collaborator(String first_name, String last_name, String email, String photo_id_url, CollaboratorType type, Country country) {
