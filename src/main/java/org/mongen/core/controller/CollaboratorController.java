@@ -32,37 +32,39 @@ public class CollaboratorController {
 	
 	@ApiOperation(value = "Get All the Collaborators")
 	@GetMapping("/collaborators")
-	public ResponseEntity<List<Collaborator>> getCoolCollaborators(){
-		List<Collaborator> cola = collaboratorServ.getCollaborators();
-		return ResponseEntity.status(HttpStatus.OK).body(cola);
+	public ResponseEntity<List<CollaboratorResponse>> getCoolCollaborators(){
+		List<Collaborator> collaborators = collaboratorServ.getCollaborators();
+		List<CollaboratorResponse> collaborators_resp = collaboratorServ.generateListCollaboratorResponse(collaborators);
+		return ResponseEntity.status(HttpStatus.OK).body(collaborators_resp);
 	}
 
 	@ApiOperation(value = "Get Collaborators by Organization")
 	@GetMapping("/collaborators/organization_id/{org_id}")
-	public ResponseEntity<List<Collaborator>> getCollaboratorsByOrganization(@PathVariable("org_id") Long org_id){
-		List<Collaborator> cola = collaboratorServ.getCollaboratorsByOrganization(org_id);
-		return ResponseEntity.status(HttpStatus.OK).body(cola);
+	public ResponseEntity<List<CollaboratorResponse>> getCollaboratorsByOrganization(@PathVariable("org_id") Long org_id){
+		List<Collaborator> collaborators = collaboratorServ.getCollaboratorsByOrganization(org_id);
+		List<CollaboratorResponse> collaborators_resp = collaboratorServ.generateListCollaboratorResponse(collaborators);
+		return ResponseEntity.status(HttpStatus.OK).body(collaborators_resp);
 	}
 
 	@ApiOperation(value = "Get All the Collaborator Types")
 	@GetMapping("/collaborators/type")
 	public ResponseEntity<List<CollaboratorType>> getCollaboratorTypes(){
-		List<CollaboratorType> cola = collaboratorServ.getCollaboratorTypes();
-		return ResponseEntity.status(HttpStatus.OK).body(cola);
+		List<CollaboratorType> types = collaboratorServ.getCollaboratorTypes();
+		return ResponseEntity.status(HttpStatus.OK).body(types);
 	}
 	
 	@ApiOperation(value = "Get one Collaborator")
 	@GetMapping("/collaborator/{id}")
 	public ResponseEntity<CollaboratorResponse> getCollaboratorId(@PathVariable("id") Long id){
-		CollaboratorResponse cola = new CollaboratorResponse(collaboratorServ.findCollaboratorById(id));
-		return ResponseEntity.status(HttpStatus.OK).body(cola);
+		CollaboratorResponse collaborator = new CollaboratorResponse(collaboratorServ.findCollaboratorById(id));
+		return ResponseEntity.status(HttpStatus.OK).body(collaborator);
 	}
 
 	@ApiOperation(value = "Get one Main Contact")
 	@GetMapping("/main_contact/{id}")
 	public ResponseEntity<MainContactResponse> getMainContactId(@PathVariable("id") Long id){
-		MainContactResponse cola = new MainContactResponse(collaboratorServ.findCollaboratorById(id));
-		return ResponseEntity.status(HttpStatus.OK).body(cola);
+		MainContactResponse collaborator = new MainContactResponse(collaboratorServ.findCollaboratorById(id));
+		return ResponseEntity.status(HttpStatus.OK).body(collaborator);
 	}
 	
 	@ApiOperation(value = "Create a Collaborator")
@@ -82,8 +84,8 @@ public class CollaboratorController {
 	@ApiOperation(value = "Update a Collaborator")
 	@PatchMapping("/collaborator/{id}")
 	public ResponseEntity<Collaborator> updateCollaborator(@PathVariable("id") Long id, @RequestBody Collaborator collaborator){
-		Collaborator cola = collaboratorServ.updateCollaborator(collaborator, id);
-		return ResponseEntity.status(HttpStatus.OK).body(cola);
+		Collaborator updated_collaborator = collaboratorServ.updateCollaborator(collaborator, id);
+		return ResponseEntity.status(HttpStatus.OK).body(updated_collaborator);
 	}
 	
 	@ApiOperation(value = "Delete a Collaborator")

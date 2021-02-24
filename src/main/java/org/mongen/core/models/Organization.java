@@ -61,14 +61,6 @@ public class Organization implements Serializable{
 	@ManyToMany(mappedBy = "organizations")
 	private List<Beneficiary> beneficiaries;
 
-//	@ManyToMany
-//	@JoinTable(
-//			name = "organization_beneficiaries",
-//			joinColumns = @JoinColumn(name = "organization_id"),
-//			inverseJoinColumns = @JoinColumn(name = "beneficiary_id")
-//	)
-//	private List<Beneficiary> beneficiaries;
-
 	public Organization() {
 		
 	}

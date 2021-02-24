@@ -1,13 +1,22 @@
 package org.mongen.core.models.responses;
 
 import lombok.Data;
+import org.mongen.core.models.Beneficiary;
 import org.mongen.core.models.Collaborator;
 import org.mongen.core.models.Organization;
+import org.mongen.core.service.CollaboratorService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
+
+
 
 @Data
 public class OrganizationResponse {
+
+	@Autowired
+	CollaboratorService collaboratorServ;
 
 	private Long id;
 	private String name;
@@ -23,6 +32,8 @@ public class OrganizationResponse {
 	private Date created;
 	private Date updated;
 	private String country;
+	private List<Collaborator> collaborators;
+	private List<Beneficiary> beneficiaries;
 
 	public OrganizationResponse(Organization org){
 		this.id = org.getId();
@@ -39,5 +50,7 @@ public class OrganizationResponse {
 		this.created = org.getCreated();
 		this.updated = org.getUpdated();
 		this.country = org.getCountry().getName();
+		this.collaborators = org.getCollaborators();
+		this.beneficiaries = org.getBeneficiaries();
 	}
 }

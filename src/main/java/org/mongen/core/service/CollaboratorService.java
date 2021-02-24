@@ -3,6 +3,7 @@ package org.mongen.core.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.mongen.core.models.Collaborator;
 import org.mongen.core.models.CollaboratorType;
@@ -10,6 +11,8 @@ import org.mongen.core.models.Country;
 import org.mongen.core.models.Organization;
 import org.mongen.core.models.payloads.CollaboratorPayload;
 import org.mongen.core.models.payloads.MainContactPayload;
+import org.mongen.core.models.responses.CollaboratorResponse;
+import org.mongen.core.models.responses.OrganizationResponse;
 import org.mongen.core.repository.CollaboratorRepository;
 import org.mongen.core.repository.CollaboratorTypeRepository;
 import org.mongen.core.repository.CountryRepository;
@@ -74,5 +77,27 @@ public class CollaboratorService {
 
 	public List<CollaboratorType> getCollaboratorTypes() {
 		return collaboratorTypeRepo.findAll();
+	}
+
+	public CollaboratorResponse generateCollaboratorResponse(Collaborator collaborator){
+		CollaboratorResponse collaborator_resp = new CollaboratorResponse(
+				collaborator.getId(),
+				collaborator.getFirstName(),
+				collaborator.getLastName(),
+				collaborator.getEmail(),
+				collaborator.getType().getName(),
+				collaborator.getCreated(),
+				collaborator.getUpdated(),
+				collaborator.getCountryCollaborator().getName());
+		return collaborator_resp;
+	}
+
+	public List<CollaboratorResponse> generateListCollaboratorResponse(List<Collaborator> collaborators){
+
+		List<CollaboratorResponse> collaborators_response = collaborators.stream()
+				.map(element-> this.generateCollaboratorResponse(element))
+				.collect(Collectors.toList());
+
+		return collaborators_response;
 	}
 }

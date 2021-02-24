@@ -39,6 +39,7 @@ public class Collaborator implements Serializable{
 	@JoinColumn(name="type")
 	private CollaboratorType type;
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(
 			name = "collaborator_organization",
