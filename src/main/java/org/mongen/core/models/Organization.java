@@ -49,6 +49,10 @@ public class Organization implements Serializable{
 	@JoinColumn(name="contact")
 	private Collaborator main_contact;
 
+	@ManyToOne
+	@JoinColumn(name="status")
+	private OrganizationStatus status;
+
 //	@OneToMany
 //	@JoinColumn(name="social_media")
 //	private Collection<SocialMedia> social_media;
