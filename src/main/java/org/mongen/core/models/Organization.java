@@ -69,7 +69,7 @@ public class Organization implements Serializable{
 		
 	}
 
-	public Organization(String name, String seo_name, String logo_url, String story, String mission, String vision, String address, String social_network_url, Country country, Collaborator contact) {
+	public Organization(String name, String seo_name, String logo_url, String story, String mission, String vision, String address, String social_network_url, Country country, Collaborator contact, OrganizationStatus status) {
 		this.name = name;
 		this.seoName = seo_name;
 		this.logoUrl = logo_url;
@@ -80,6 +80,7 @@ public class Organization implements Serializable{
 		this.socialNetworkUrl = social_network_url;
 		this.country = country;
 		this.main_contact = contact;
+		this.status = status;
 	}
 
 	@PrePersist

@@ -2,6 +2,7 @@ package org.mongen.core.controller;
 
 import io.swagger.annotations.ApiOperation;
 import org.mongen.core.models.Organization;
+import org.mongen.core.models.OrganizationStatus;
 import org.mongen.core.models.payloads.OrganizationPayload;
 import org.mongen.core.models.payloads.OrganizationVerifiedStatusPayload;
 import org.mongen.core.models.responses.OrganizationResponse;
@@ -25,6 +26,13 @@ public class OrganizationController {
 		List<Organization> orgs = organizationServ.getOrganizations();
 		List<OrganizationResponse> response = organizationServ.generateListOrganizationResponse(orgs);
 		return ResponseEntity.status(HttpStatus.OK).body(response);
+	}
+
+	@ApiOperation(value = "Get All the Organizations statuses")
+	@GetMapping("/organizations/status")
+	public ResponseEntity<List<OrganizationStatus>> getOrganizationsStatuses(){
+		List<OrganizationStatus> org_statuses = organizationServ.getOrganizationStatuses();
+		return ResponseEntity.status(HttpStatus.OK).body(org_statuses);
 	}
 
 	@ApiOperation(value = "Get Organizations by verified state")
