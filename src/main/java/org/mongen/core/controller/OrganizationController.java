@@ -9,9 +9,14 @@ import org.mongen.core.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -53,7 +58,7 @@ public class OrganizationController {
 	
 	@ApiOperation(value = "Create a Organization")
 	@PostMapping("/organization")
-	public ResponseEntity<Organization> createOrganization(@RequestBody OrganizationPayload org){
+	public ResponseEntity<Organization> createOrganization(@Valid @RequestBody OrganizationPayload org){
 		Organization new_org = organizationServ.createOrganization(org);
 		return ResponseEntity.status(HttpStatus.CREATED).body(new_org);
 	}
@@ -77,5 +82,17 @@ public class OrganizationController {
 	public ResponseEntity<?> deleteOrganization(@PathVariable("id") Long id){
 		organizationServ.deleteOrganization(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Delete Organization with ID: " + id);
+	}
+
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+		Map<String, String> errors = new HashMap<>();
+		ex.getBindingResult().getAllErrors().forEach((error) -> {
+			String fieldName = ((FieldError) error).getField();
+			String errorMessage = error.getDefaultMessage();
+			errors.put(fieldName, errorMessage);
+		});
+		return errors;
 	}
 }
