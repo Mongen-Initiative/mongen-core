@@ -4,6 +4,7 @@ import lombok.Data;
 import org.mongen.core.models.Beneficiary;
 import org.mongen.core.models.Collaborator;
 import org.mongen.core.models.Organization;
+import org.mongen.core.models.OrganizationStatus;
 import org.mongen.core.service.CollaboratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,7 +29,7 @@ public class OrganizationResponse {
 	private String mission;
 	private String vision;
 	private MainContactResponse main_contact;
-	private boolean verified;
+	private String status;
 	private Date created;
 	private Date updated;
 	private String country;
@@ -46,7 +47,7 @@ public class OrganizationResponse {
 		this.mission = org.getMission();
 		this.vision = org.getVision();
 		this.main_contact = new MainContactResponse(org.getMain_contact()) ;
-		this.verified = org.isVerified();
+		this.status = org.getStatus().getName();
 		this.created = org.getCreated();
 		this.updated = org.getUpdated();
 		this.country = org.getCountry().getName();

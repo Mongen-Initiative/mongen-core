@@ -25,7 +25,6 @@ public class Organization implements Serializable{
 	private String logoUrl;
 	@Column(name="seo_name")
 	private String seoName;
-	private boolean verified;
 	private String address;
 	@Column(name="social_network_url")
 	private String socialNetworkUrl;

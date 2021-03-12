@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiOperation;
 import org.mongen.core.models.Organization;
 import org.mongen.core.models.OrganizationStatus;
 import org.mongen.core.models.payloads.OrganizationPayload;
-import org.mongen.core.models.payloads.OrganizationVerifiedStatusPayload;
+import org.mongen.core.models.payloads.OrganizationStatusPayload;
 import org.mongen.core.models.responses.OrganizationResponse;
 import org.mongen.core.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +35,10 @@ public class OrganizationController {
 		return ResponseEntity.status(HttpStatus.OK).body(org_statuses);
 	}
 
-	@ApiOperation(value = "Get Organizations by verified state")
-	@GetMapping("/organizations/verified/{state}")
-	public ResponseEntity<List<OrganizationResponse>> getOrganizationsByVerifiedState(@PathVariable("state") Boolean state){
-		List<Organization> orgs = organizationServ.findOrganizationByVerified(state);
+	@ApiOperation(value = "Get Organizations by status")
+	@GetMapping("/organizations/status/{status}")
+	public ResponseEntity<List<OrganizationResponse>> getOrganizationsByVerifiedState(@PathVariable("status") String status){
+		List<Organization> orgs = organizationServ.findOrganizationsByStatus(status);
 		List<OrganizationResponse> response = organizationServ.generateListOrganizationResponse(orgs);
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
@@ -73,10 +73,10 @@ public class OrganizationController {
 		return ResponseEntity.status(HttpStatus.OK).body(bene);
 	}
 
-	@ApiOperation(value = "Update verified status of an Organization")
-	@PatchMapping("/set_organization_verified/{id}")
-	public ResponseEntity<Organization> updateVerifiedStatusOrganization(@PathVariable("id") Long id, @RequestBody OrganizationVerifiedStatusPayload payload){
-		Organization bene = organizationServ.updateVerifiedStatus(payload, id);
+	@ApiOperation(value = "Update status of an Organization")
+	@PatchMapping("/set_organization_status/{id}")
+	public ResponseEntity<Organization> updateOrganizationStatus(@PathVariable("id") Long id, @RequestBody OrganizationStatusPayload payload){
+		Organization bene = organizationServ.updateStatus(payload, id);
 		return ResponseEntity.status(HttpStatus.OK).body(bene);
 	}
 	
