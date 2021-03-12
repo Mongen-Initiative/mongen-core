@@ -1,13 +1,12 @@
 package org.mongen.core.service;
 
-import org.mongen.core.models.Collaborator;
-import org.mongen.core.models.Country;
-import org.mongen.core.models.Organization;
+import org.mongen.core.models.*;
 import org.mongen.core.models.payloads.OrganizationPayload;
-import org.mongen.core.models.payloads.OrganizationVerifiedStatusPayload;
+import org.mongen.core.models.payloads.OrganizationStatusPayload;
 import org.mongen.core.models.responses.OrganizationResponse;
 import org.mongen.core.repository.CountryRepository;
 import org.mongen.core.repository.OrganizationRepository;
+import org.mongen.core.repository.OrganizationStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +18,8 @@ import java.util.stream.Collectors;
 public class OrganizationService {
 	@Autowired
 	OrganizationRepository organizationRepo;
+	@Autowired
+	OrganizationStatusRepository organizationStatusRepo;
 	@Autowired
 	CountryRepository countryRepo;
 	@Autowired
@@ -46,15 +47,18 @@ public class OrganizationService {
 		}
 	}
 
-	public List<Organization> findOrganizationByVerified(boolean state) {
-		List<Organization> temp = organizationRepo.findByVerifiedIs(state);
+	public List<Organization> findOrganizationsByStatus(String status) {
+        OrganizationStatus org_status = this.getOrganizationStatus(status);
+		List<Organization> temp = organizationRepo.findByStatusIs(org_status);
 		return temp;
 	}
 	
 	public Organization createOrganization(OrganizationPayload org_payload) {
 		Country country = countryRepo.findByCountryISO(org_payload.getCountry_iso());
 		Collaborator contact = collaboratorServ.findCollaboratorById(org_payload.getContact_id());
-		Organization new_org = new Organization(org_payload.getName(), org_payload.getSeo_name(), org_payload.getLogo_url(), org_payload.getStory(), org_payload.getMission(), org_payload.getVision(), org_payload.getAddress(), org_payload.getSocial_network_url(), country, contact);
+		OrganizationStatus org_status = this.getOrganizationStatus("Pending");
+
+		Organization new_org = new Organization(org_payload.getName(), org_payload.getSeo_name(), org_payload.getLogo_url(), org_payload.getStory(), org_payload.getMission(), org_payload.getVision(), org_payload.getAddress(), org_payload.getSocial_network_url(), country, contact, org_status);
 		return organizationRepo.save(new_org);
 	}
 	
@@ -63,10 +67,10 @@ public class OrganizationService {
 		return organizationRepo.save(nuevo);
 	}
 
-	public Organization updateVerifiedStatus(OrganizationVerifiedStatusPayload payload, Long id) {
+	public Organization updateStatus(OrganizationStatusPayload payload, Long id) {
 		Optional<Organization> temp = organizationRepo.findById(id);
 		if(temp.isPresent()) {
-			temp.get().setVerified(payload.getVerified());
+            temp.get().setStatus(this.getOrganizationStatus(payload.getStatus()));
 			return organizationRepo.save(temp.get());
 		} else {
 			return null;
@@ -89,5 +93,13 @@ public class OrganizationService {
 	
 	public void deleteOrganization(Long id) {
 		organizationRepo.deleteById(id);
+	}
+
+	public List<OrganizationStatus> getOrganizationStatuses() {
+		return organizationStatusRepo.findAll();
+	}
+
+	public OrganizationStatus getOrganizationStatus(String name) {
+		return organizationStatusRepo.findByName(name);
 	}
 }

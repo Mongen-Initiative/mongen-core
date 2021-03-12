@@ -1,6 +1,7 @@
 package org.mongen.core.repository;
 
 import org.mongen.core.models.Organization;
+import org.mongen.core.models.OrganizationStatus;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +13,5 @@ public interface OrganizationRepository extends CrudRepository<Organization,Long
 
 	Organization findBySeoName(String SeoName);
 
-	List<Organization> findByVerifiedIs(Boolean verified);
+	List<Organization> findByStatusIs(OrganizationStatus status);
 }

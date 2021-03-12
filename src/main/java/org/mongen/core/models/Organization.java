@@ -25,7 +25,6 @@ public class Organization implements Serializable{
 	private String logoUrl;
 	@Column(name="seo_name")
 	private String seoName;
-	private boolean verified;
 	private String address;
 	@Column(name="social_network_url")
 	private String socialNetworkUrl;
@@ -49,6 +48,10 @@ public class Organization implements Serializable{
 	@JoinColumn(name="contact")
 	private Collaborator main_contact;
 
+	@ManyToOne
+	@JoinColumn(name="status")
+	private OrganizationStatus status;
+
 //	@OneToMany
 //	@JoinColumn(name="social_media")
 //	private Collection<SocialMedia> social_media;
@@ -65,7 +68,7 @@ public class Organization implements Serializable{
 		
 	}
 
-	public Organization(String name, String seo_name, String logo_url, String story, String mission, String vision, String address, String social_network_url, Country country, Collaborator contact) {
+	public Organization(String name, String seo_name, String logo_url, String story, String mission, String vision, String address, String social_network_url, Country country, Collaborator contact, OrganizationStatus status) {
 		this.name = name;
 		this.seoName = seo_name;
 		this.logoUrl = logo_url;
@@ -76,6 +79,7 @@ public class Organization implements Serializable{
 		this.socialNetworkUrl = social_network_url;
 		this.country = country;
 		this.main_contact = contact;
+		this.status = status;
 	}
 
 	@PrePersist
