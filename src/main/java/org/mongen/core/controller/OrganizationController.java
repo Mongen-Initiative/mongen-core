@@ -72,6 +72,7 @@ public class OrganizationController {
 	}
 	
 	@ApiOperation(value = "Update a Organization")
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PatchMapping("/organization/{id}")
 	public ResponseEntity<Organization> updateOrganization(@PathVariable("id") Long id, @RequestBody Organization org){
 		Organization bene = organizationServ.updateOrganization(org, id);
@@ -79,6 +80,7 @@ public class OrganizationController {
 	}
 
 	@ApiOperation(value = "Update status of an Organization")
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PatchMapping("/set_organization_status/{id}")
 	public ResponseEntity<Organization> updateOrganizationStatus(@PathVariable("id") Long id, @RequestBody OrganizationStatusPayload payload){
 		Organization bene = organizationServ.updateStatus(payload, id);
