@@ -9,12 +9,11 @@ import java.util.ArrayList;
 @Data
 public class OrganizationPayload {
 
+	private String logo_url;
 	@NotBlank
 	private String name;
 	@NotBlank
 	private String seo_name;
-	@NotBlank
-	private String logo_url;
 	@NotBlank
 	private String address;
 	@NotBlank
