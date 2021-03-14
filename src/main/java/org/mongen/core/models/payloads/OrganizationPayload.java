@@ -20,6 +20,7 @@ public class OrganizationPayload {
 	private String social_network_url;
 	@NotBlank
 	private String story;
+	private String tagline;
 	@NotBlank
 	private String mission;
 	@NotBlank
