@@ -26,6 +26,7 @@ public class OrganizationResponse {
 	private String address;
 	private String social_network_url;
 	private String story;
+	private String tagline;
 	private String mission;
 	private String vision;
 	private MainContactResponse main_contact;
@@ -44,6 +45,7 @@ public class OrganizationResponse {
 		this.address = org.getAddress();
 		this.social_network_url = org.getSocialNetworkUrl();
 		this.story = org.getStory();
+		this.tagline = org.getTagline();
 		this.mission = org.getMission();
 		this.vision = org.getVision();
 		this.main_contact = new MainContactResponse(org.getMain_contact()) ;

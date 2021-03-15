@@ -58,7 +58,7 @@ public class OrganizationService {
 		Collaborator contact = collaboratorServ.findCollaboratorById(org_payload.getContact_id());
 		OrganizationStatus org_status = this.getOrganizationStatus("Pending");
 
-		Organization new_org = new Organization(org_payload.getName(), org_payload.getSeo_name(), org_payload.getLogo_url(), org_payload.getStory(), org_payload.getMission(), org_payload.getVision(), org_payload.getAddress(), org_payload.getSocial_network_url(), country, contact, org_status);
+		Organization new_org = new Organization(org_payload.getName(), org_payload.getSeo_name(), org_payload.getLogo_url(), org_payload.getStory(), org_payload.getTagline(), org_payload.getMission(), org_payload.getVision(), org_payload.getAddress(), org_payload.getSocial_network_url(), country, contact, org_status);
 		return organizationRepo.save(new_org);
 	}
 	

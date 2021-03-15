@@ -13,7 +13,6 @@ public class OrganizationPayload {
 	private String name;
 	@NotBlank
 	private String seo_name;
-	@NotBlank
 	private String logo_url;
 	@NotBlank
 	private String address;
@@ -21,6 +20,7 @@ public class OrganizationPayload {
 	private String social_network_url;
 	@NotBlank
 	private String story;
+	private String tagline;
 	@NotBlank
 	private String mission;
 	@NotBlank
