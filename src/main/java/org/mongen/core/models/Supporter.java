@@ -23,8 +23,9 @@ public class Supporter implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(length = 300)
 	private String name;
-	@Column(name="last_name")
+	@Column(name="last_name", length = 300)
 	private String lastName;
 	@Column(updatable=false)
 	private Date created;

@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,18 +20,25 @@ public class Organization implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ApiModelProperty(hidden=true)
 	private Long id;
-	@Column(name="name")
+	@Column(name="name", length = 50)
+	@Size(min = 3, max = 50)
 	private String name;
-	@Column(name="logo_url")
+	@Column(name="logo_url", length = 2000)
 	private String logoUrl;
-	@Column(name="seo_name")
+	@Column(name="seo_name", length = 50)
+	@Size(min = 3, max = 50)
 	private String seoName;
+	@Column(length = 2000)
 	private String address;
-	@Column(name="social_network_url")
+	@Column(name="social_network_url", length = 2000)
 	private String socialNetworkUrl;
+	@Column(length = 3000)
 	private String story;
+	@Column(length = 3000)
 	private String mission;
+	@Column(length = 3000)
 	private String vision;
+	@Column(length = 3000)
 	private String tagline;
 
 

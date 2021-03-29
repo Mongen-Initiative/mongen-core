@@ -18,12 +18,13 @@ public class Collaborator implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name="first_name")
+	@Column(name="first_name", length = 300)
 	private String firstName;
-	@Column(name="last_name")
+	@Column(name="last_name", length = 300)
 	private String lastName;
+	@Column(length = 2000)
 	private String email;
-	@Column(name="photo_id_url")
+	@Column(name="photo_id_url", length = 2000)
 	private String photoIdURL;
 	@JsonIgnore
 	@Column(updatable=false)

@@ -31,16 +31,17 @@ public class Beneficiary implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ApiModelProperty(hidden=true)
 	private Long id;
-	@Column(name="first_name")
+	@Column(name="first_name", length = 300)
 	private String firstName;
-	@Column(name="last_name")
+	@Column(name="last_name", length = 300)
 	private String lastName;
+	@Column(length = 300)
 	private String gender;
-	private Integer age;
 	@Column(name="date_of_birth")
 	private Date dateOfBirth;
 	private Integer height;
 	private Integer weight;
+	@Column(length = 2000)
 	private String address;
 	
 	@ApiModelProperty(hidden=true)
