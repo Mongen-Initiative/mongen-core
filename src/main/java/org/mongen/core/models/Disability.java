@@ -26,8 +26,9 @@ public class Disability implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(length=300)
 	private String name;
-	@Column(length=500)
+	@Column(length=2000)
 	private String description;
 	@Column(updatable=false)
 	private Date created;

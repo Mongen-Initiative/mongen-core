@@ -15,7 +15,9 @@ public class StreetLocations implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(length = 50)
 	private String name;
+	@Column(length = 2000)
 	private String address;
 
 	@Column(updatable=false)

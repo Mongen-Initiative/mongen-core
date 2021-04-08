@@ -26,6 +26,7 @@ public class Institution implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(length=300)
 	private String name;
 	@Column(updatable=false)
 	private Date created;
