@@ -30,6 +30,8 @@ public class Donor implements Serializable{
 	private String firstName;
 	@Column(name="last_name", length = 300)
 	private String lastName;
+	@Column(length = 2000)
+	private String address;
 	@Column(updatable=false)
 	private Date created;
 	private Date updated;
@@ -45,9 +47,25 @@ public class Donor implements Serializable{
         inverseJoinColumns = @JoinColumn(name = "beneficiary_id")
     )
     private List<Beneficiary> beneficiaries;
+
+	@ManyToMany
+	@JoinTable(
+			name = "organization_donors",
+			joinColumns = @JoinColumn(name = "donor_id"),
+			inverseJoinColumns = @JoinColumn(name = "organization_id")
+	)
+	private List<Organization> organizations;
 	
 	public Donor(){
 		
+	}
+
+	public Donor(String firstName, String lastName, String address, Country country, List<Organization> organizations){
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.country = country;
+		this.organizations = organizations;
 	}
 	
 	@PrePersist

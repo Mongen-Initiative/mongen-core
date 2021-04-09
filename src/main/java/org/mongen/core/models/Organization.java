@@ -1,6 +1,7 @@
 package org.mongen.core.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -73,6 +74,15 @@ public class Organization implements Serializable{
 	@JsonIgnore
 	@ManyToMany(mappedBy = "organizations")
 	private List<Beneficiary> beneficiaries;
+
+	@JsonIgnoreProperties(value={"organizations","created","id","updated","country"})
+	@ManyToMany
+	@JoinTable(
+			name = "organization_donors",
+			joinColumns = @JoinColumn(name = "organization_id"),
+			inverseJoinColumns = @JoinColumn(name = "donor_id")
+	)
+	private List<Donor> donors;
 
 	public Organization() {
 		

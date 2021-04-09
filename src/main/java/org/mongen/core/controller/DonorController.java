@@ -3,6 +3,7 @@ package org.mongen.core.controller;
 import java.util.List;
 
 import org.mongen.core.models.Donor;
+import org.mongen.core.models.payloads.DonorPayload;
 import org.mongen.core.service.DonorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,7 +42,7 @@ public class DonorController {
 	
 	@ApiOperation(value = "Create a Donor")
 	@PostMapping("/donors")
-	public ResponseEntity<Donor> createDonor(@RequestBody Donor donor){
+	public ResponseEntity<Donor> createDonor(@RequestBody DonorPayload donor){
 		Donor cola = donorServ.createDonor(donor);
 		return ResponseEntity.status(HttpStatus.CREATED).body(cola);
 	}
