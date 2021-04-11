@@ -34,28 +34,28 @@ public class DonorController {
 	}
 	
 	@ApiOperation(value = "Get one Donor")
-	@GetMapping("/donors/{id}")
+	@GetMapping("/donor/{id}")
 	public ResponseEntity<Donor> getDonorId(@PathVariable("id") Long id){
 		Donor cola = donorServ.findDonorById(id);
 		return ResponseEntity.status(HttpStatus.OK).body(cola);
 	}
 	
 	@ApiOperation(value = "Create a Donor")
-	@PostMapping("/donors")
+	@PostMapping("/donor")
 	public ResponseEntity<Donor> createDonor(@RequestBody DonorPayload donor){
 		Donor cola = donorServ.createDonor(donor);
 		return ResponseEntity.status(HttpStatus.CREATED).body(cola);
 	}
 	
 	@ApiOperation(value = "Update a Donor")
-	@PatchMapping("/donors/{id}")
+	@PatchMapping("/donor/{id}")
 	public ResponseEntity<Donor> updateDonor(@PathVariable("id") Long id, @RequestBody Donor donor){
 		Donor cola = donorServ.updateDonor(donor, id);
 		return ResponseEntity.status(HttpStatus.OK).body(cola);
 	}
 	
 	@ApiOperation(value = "Delete a Donor")
-	@DeleteMapping("/donors/{id}")
+	@DeleteMapping("/donor/{id}")
 	public ResponseEntity<?> deleteDonor(@PathVariable("id") Long id){
 		donorServ.deleteDonor(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Delete Donor with ID: " + id);

@@ -37,11 +37,11 @@ public class DonorService {
 	}
 	
 	public Donor createDonor(DonorPayload donor_payload) {
-		Country country = countryRepo.findByCountryISO(donor_payload.getCountry_iso());
+		Country country = countryRepo.findByCountryISO(donor_payload.getCountryIso());
 		List<Organization> org_list = new ArrayList<>();
-		Optional<Organization> organization = organizationRepo.findById(donor_payload.getOrganization_id());
+		Optional<Organization> organization = organizationRepo.findById(donor_payload.getOrganizationId());
 		org_list.add(organization.get());
-		Donor new_donor = new Donor(donor_payload.getFirst_name(), donor_payload.getLast_name(), donor_payload.getAddress(), country, org_list);
+		Donor new_donor = new Donor(donor_payload.getFirstName(), donor_payload.getLastName(), donor_payload.getAddress(), country, org_list);
 		return donorRepo.save(new_donor);
 	}
 	

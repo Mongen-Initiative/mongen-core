@@ -75,7 +75,7 @@ public class Organization implements Serializable{
 	@ManyToMany(mappedBy = "organizations")
 	private List<Beneficiary> beneficiaries;
 
-	@JsonIgnoreProperties(value={"organizations","created","id","updated","country"})
+	@JsonIgnoreProperties(value={"organizations", "beneficiaries", "created","id","updated","country"})
 	@ManyToMany
 	@JoinTable(
 			name = "organization_donors",

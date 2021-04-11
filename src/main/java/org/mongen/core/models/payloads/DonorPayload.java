@@ -9,13 +9,13 @@ import java.util.Date;
 @Data
 public class DonorPayload {
 	@NotBlank
-	private String first_name;
+	private String firstName;
 	@NotBlank
-	private String last_name;
+	private String lastName;
 	@NotBlank
 	private String address;
 	@NotBlank
-	private String country_iso;
+	private String countryIso;
 	@NotNull
-	private Long organization_id;
+	private Long organizationId;
 }

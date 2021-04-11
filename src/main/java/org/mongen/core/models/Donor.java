@@ -1,5 +1,6 @@
 package org.mongen.core.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -48,6 +49,7 @@ public class Donor implements Serializable{
     )
     private List<Beneficiary> beneficiaries;
 
+	@JsonIgnoreProperties(value={"donors","beneficiaries", "collaborators", "created","id","updated","country"})
 	@ManyToMany
 	@JoinTable(
 			name = "organization_donors",
